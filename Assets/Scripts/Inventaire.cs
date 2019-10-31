@@ -1,18 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventaire : MonoBehaviour
+public class Inventaire : Singleton<Inventaire>
 { 
-    private static Inventaire inv = null ;
-
-    public static Inventaire getInstance()
-    {
-        if(inv == null)
-        {
-            inv = new Inventaire();
-        }
-        return inv;
-    }
+   // public static Inventaire inv = null;
 
     public enum MaterialRessourceType
     {
@@ -28,6 +19,7 @@ public class Inventaire : MonoBehaviour
 
     private Inventaire()
     {
+        Debug.Log("Hello");
         List<MaterialRessourceType> list_material = new List<MaterialRessourceType>();
         foreach (MaterialRessourceType type in System.Enum.GetValues(typeof(MaterialRessourceType)))
         {
@@ -40,6 +32,7 @@ public class Inventaire : MonoBehaviour
             list_weapon.Add(type);
         }
         m_compter = new CompterRessource(list_material, list_weapon);
+        
     }
 
     public void Ajouter_Material(MaterialRessourceType type ,uint nb = 1)

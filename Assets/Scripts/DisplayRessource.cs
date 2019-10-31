@@ -15,24 +15,22 @@ public class DisplayRessource : MonoBehaviour
     {
        
         Cursor.visible = true;
-        myText = GameObject.Find("TextCaisse").GetComponent<Text>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Inventaire.getInstance().Ajouter_Material(Inventaire.MaterialRessourceType.Bois);
-        Inventaire.getInstance().Ajouter_Material(Inventaire.MaterialRessourceType.Bois, 5);
-        Inventaire.getInstance().Suprrimer_Material(Inventaire.MaterialRessourceType.Bois, 2);
+        //Inventaire.getInstance().Ajouter_Material(Inventaire.MaterialRessourceType.Bois);
+        //Inventaire.getInstance().Ajouter_Material(Inventaire.MaterialRessourceType.Bois, 5);
+        //Inventaire.getInstance().Suprrimer_Material(Inventaire.MaterialRessourceType.Bois, 2);
+        Dictionary<Inventaire.MaterialRessourceType, int> dict = Inventaire.Instance.get_Inventaire_Material();
+        nb = dict[type].ToString();
         DisplayInfo();
     }
 
     void DisplayInfo()
     {
-
-        Dictionary<Inventaire.MaterialRessourceType, int> dict = Inventaire.getInstance().get_Inventaire_Material();
-        nb = dict[type].ToString();
-        myText.text =nb;
+        myText.text = nb;
     }
 
 }

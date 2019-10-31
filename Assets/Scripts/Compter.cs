@@ -9,11 +9,11 @@ public class CompterRessource : MonoBehaviour
 
     public CompterRessource(List<Inventaire.MaterialRessourceType> list_material, List<Inventaire.WeaponRessourceType> list_weapon)
     {
-     foreach (Inventaire.MaterialRessourceType type in list_material)
+        foreach (Inventaire.MaterialRessourceType type in list_material)
         {
             m_compter_material.Add(type, 0);
         }
-     foreach (Inventaire.WeaponRessourceType type in list_material)
+        foreach (Inventaire.WeaponRessourceType type in list_material)
         {
             m_compter_weapon.Add(type, 0);
         }
