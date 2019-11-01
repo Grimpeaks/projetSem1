@@ -7,7 +7,7 @@ public class Main : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Inventaire.Instance.Ajouter_Material(Inventaire.MaterialRessourceType.Bois, 10);
+        //RessourceManager.Instance.Ajouter_Material(RessourceManager.MaterialRessourceType.Bois, 10);
       
 
     }

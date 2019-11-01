@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class CompterRessource : MonoBehaviour
 {
-    Dictionary<Inventaire.MaterialRessourceType, int> m_compter_material= new Dictionary<Inventaire.MaterialRessourceType, int>();
-    Dictionary<Inventaire.WeaponRessourceType, int> m_compter_weapon = new Dictionary<Inventaire.WeaponRessourceType, int>();
+    Dictionary<RessourceManager.MaterialRessourceType, int> m_compter_material= new Dictionary<RessourceManager.MaterialRessourceType, int>();
+    Dictionary<RessourceManager.WeaponRessourceType, int> m_compter_weapon = new Dictionary<RessourceManager.WeaponRessourceType, int>();
 
-    public CompterRessource(List<Inventaire.MaterialRessourceType> list_material, List<Inventaire.WeaponRessourceType> list_weapon)
+    public CompterRessource(List<RessourceManager.MaterialRessourceType> list_material, List<RessourceManager.WeaponRessourceType> list_weapon)
     {
-        foreach (Inventaire.MaterialRessourceType type in list_material)
+        foreach (RessourceManager.MaterialRessourceType type in list_material)
         {
             m_compter_material.Add(type, 0);
         }
-        foreach (Inventaire.WeaponRessourceType type in list_material)
+        foreach (RessourceManager.WeaponRessourceType type in list_material)
         {
             m_compter_weapon.Add(type, 0);
         }
@@ -29,23 +29,23 @@ public class CompterRessource : MonoBehaviour
         
     }
 
-    public void Add_Supp_Material(Inventaire.MaterialRessourceType type, int nb)
+    public void Add_Supp_Material(RessourceManager.MaterialRessourceType type, int nb)
     {
         m_compter_material[type] += nb;
     }
 
-    public void Add_Supp_Weapon(Inventaire.WeaponRessourceType type, int nb)
+    public void Add_Supp_Weapon(RessourceManager.WeaponRessourceType type, int nb)
     {
 
         m_compter_weapon[type] += nb;
     }
 
-    public Dictionary<Inventaire.MaterialRessourceType, int> get_Inventaire_Material()
+    public Dictionary<RessourceManager.MaterialRessourceType, int> get_Inventaire_Material()
     {
         return m_compter_material;
     }
 
-    public Dictionary<Inventaire.WeaponRessourceType, int> get_Inventaire_Weapon()
+    public Dictionary<RessourceManager.WeaponRessourceType, int> get_Inventaire_Weapon()
     {
         return m_compter_weapon;
     }

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventaire : Singleton<Inventaire>
+public class RessourceManager : Singleton<RessourceManager>
 { 
-   // public static Inventaire inv = null;
+    private Dictionary<RessourceManager.MaterialRessourceType, float> m_dictionnaire_temps_production = new Dictionary<RessourceManager.MaterialRessourceType, float>();
 
-    public enum MaterialRessourceType
+    public enum MaterialRessourceType 
     {
         Bois,
         Roche
@@ -17,7 +17,7 @@ public class Inventaire : Singleton<Inventaire>
     }
     private CompterRessource m_compter;
 
-    private Inventaire()
+    private RessourceManager()
     {
         Debug.Log("Hello");
         List<MaterialRessourceType> list_material = new List<MaterialRessourceType>();
@@ -32,7 +32,9 @@ public class Inventaire : Singleton<Inventaire>
             list_weapon.Add(type);
         }
         m_compter = new CompterRessource(list_material, list_weapon);
-        
+
+        m_dictionnaire_temps_production.Add(MaterialRessourceType.Bois, 30f);
+        m_dictionnaire_temps_production.Add(MaterialRessourceType.Roche, 50f);
     }
 
     public void Ajouter_Material(MaterialRessourceType type ,uint nb = 1)
@@ -56,25 +58,26 @@ public class Inventaire : Singleton<Inventaire>
         m_compter.Add_Supp_Weapon(type, (int)nb * -1);
     }
 
-    public Dictionary<Inventaire.MaterialRessourceType, int> get_Inventaire_Material()
+    public Dictionary<RessourceManager.MaterialRessourceType, int> get_Inventaire_Material()
     {
         return m_compter.get_Inventaire_Material();
 
     }
-    public Dictionary<Inventaire.WeaponRessourceType, int> get_Inventaire_Weapon()
+    public Dictionary<RessourceManager.WeaponRessourceType, int> get_Inventaire_Weapon()
     {
         return m_compter.get_Inventaire_Weapon();
 
     }
 
-
-    // Start is called before the first frame update
+    public float get_Temps_Production(MaterialRessourceType type)
+    {
+        return m_dictionnaire_temps_production[type];
+    }
     void Start()
     {
 
     }
 
-    // Update is called once per frame
     void Update()
     {
 

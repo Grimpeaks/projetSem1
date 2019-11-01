@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class DisplayRessource : MonoBehaviour
 {
     string nb;
-    public Inventaire.MaterialRessourceType type;
+    public RessourceManager.MaterialRessourceType type;
     public Text myText;
    
 
@@ -23,7 +23,7 @@ public class DisplayRessource : MonoBehaviour
         //Inventaire.getInstance().Ajouter_Material(Inventaire.MaterialRessourceType.Bois);
         //Inventaire.getInstance().Ajouter_Material(Inventaire.MaterialRessourceType.Bois, 5);
         //Inventaire.getInstance().Suprrimer_Material(Inventaire.MaterialRessourceType.Bois, 2);
-        Dictionary<Inventaire.MaterialRessourceType, int> dict = Inventaire.Instance.get_Inventaire_Material();
+        Dictionary<RessourceManager.MaterialRessourceType, int> dict = RessourceManager.Instance.get_Inventaire_Material();
         nb = dict[type].ToString();
         DisplayInfo();
     }
