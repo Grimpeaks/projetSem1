@@ -16,7 +16,10 @@ public class Batiment_Production : MonoBehaviour
     private float tpsProdDépart;
     private float mutliplicateur_tps = 0.0f;
     public RessourceManager.MaterialRessourceType type_ressource_produite;
-    
+    private AudioSource audioSourcePlus;
+    private AudioSource audioSourceMoins;
+
+
     public Slider progress;
 
     void Start()
@@ -28,12 +31,15 @@ public class Batiment_Production : MonoBehaviour
         progress.value = 100;
         tpsProdDépart = RessourceManager.Instance.get_Temps_Production(type_ressource_produite);
         tpsProd = tpsProdDépart;
-
+        audioSourcePlus = boutonPlus.GetComponent<AudioSource>();
+        audioSourceMoins = boutonMoins.GetComponent<AudioSource>();
     }
 
     // void Oncollision(){ ajouter serviteur a liste serviteurs_actifs}
     void OnClickPlus()
     {
+
+        audioSourcePlus.Play();
         m_nb_serviteur += 1;
         mutliplicateur_tps += 0.5f;
         Debug.Log("You have clicked the button Plus! " + tpsProd.ToString());
@@ -43,6 +49,7 @@ public class Batiment_Production : MonoBehaviour
 
     void OnClickMoins()
     {
+        audioSourceMoins.Play();
         if (m_nb_serviteur > 0)
         {
             m_nb_serviteur -= 1;
@@ -83,5 +90,5 @@ public class Batiment_Production : MonoBehaviour
         }
     }
 
-
+  
 }
