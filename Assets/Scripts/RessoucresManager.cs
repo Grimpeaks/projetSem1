@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RessourceManager : Singleton<RessourceManager>
-{ 
+{
+    private int m_max_ressource=15;
     private Dictionary<RessourceManager.MaterialRessourceType, float> m_dictionnaire_temps_production = new Dictionary<RessourceManager.MaterialRessourceType, float>();
-
+    private Dictionary<RessourceManager.MaterialRessourceType, Sprite> m_dictionnaire_Images = new Dictionary<RessourceManager.MaterialRessourceType, Sprite>();
+    
     public enum MaterialRessourceType 
     {
         Bois,
@@ -15,8 +18,13 @@ public class RessourceManager : Singleton<RessourceManager>
         Bois,
         Roche
     }
+
     private CompterRessource m_compter;
 
+    public int get_Max_Ressource()
+    {
+        return m_max_ressource;
+    }
     private RessourceManager()
     {
         Debug.Log("Hello");
@@ -73,8 +81,15 @@ public class RessourceManager : Singleton<RessourceManager>
     {
         return m_dictionnaire_temps_production[type];
     }
+
+    public Sprite get_Images(MaterialRessourceType type)
+    {
+        return m_dictionnaire_Images[type];
+    }
     void Start()
     {
+        m_dictionnaire_Images.Add(MaterialRessourceType.Bois, Resources.Load<Sprite>("./Images/Ash_Wood.png"));
+        m_dictionnaire_Images.Add(MaterialRessourceType.Roche, Resources.Load<Sprite>("./Images/rock-576667_960_720.png"));
 
     }
 
