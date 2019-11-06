@@ -7,6 +7,7 @@ public class Batiment_Production : MonoBehaviour
 {
     public Button boutonPlus;
     public Button boutonMoins;
+    //public AudioClip RessourcesBati;
     private int m_nb_serviteur = 0;
     public Text myText;
     private string m_nb_serviteur_string;
@@ -16,6 +17,8 @@ public class Batiment_Production : MonoBehaviour
     public RessourceManager.MaterialRessourceType type_ressource_produite;
     private AudioSource audioSourcePlus;
     private AudioSource audioSourceMoins;
+    private AudioSource audioSou_Serviteurs;
+    //private AudioSource audioSourceRessource = RessourcesBati;
 
     public Slider progress;
 
@@ -30,6 +33,7 @@ public class Batiment_Production : MonoBehaviour
         tpsProd = tpsProdDépart;
         audioSourcePlus = boutonPlus.GetComponent<AudioSource>();
         audioSourceMoins = boutonMoins.GetComponent<AudioSource>();
+        //audioSou_Serviteurs = GameObject.Find("pancarte_Serviteur").GetComponent<AudioSource>();
     }
 
     // void Oncollision(){ ajouter serviteur a liste serviteurs_actifs}
@@ -39,6 +43,7 @@ public class Batiment_Production : MonoBehaviour
         audioSourcePlus.Play();
         m_nb_serviteur += 1;
         mutliplicateur_tps += 0.5f;
+
         Debug.Log("You have clicked the button Plus! " + tpsProd.ToString());
         //Choisir un serviteur a ajouter dans la liste serviteurs_ajoutes
         //Deplacer serviteur jusqu'au batiment
@@ -51,11 +56,15 @@ public class Batiment_Production : MonoBehaviour
         {
             m_nb_serviteur -= 1;
             mutliplicateur_tps -= 0.5f;
-            if (m_nb_serviteur <= 0) { tpsProd = tpsProdDépart;
+
+            if (m_nb_serviteur <= 0) {
+                tpsProd = tpsProdDépart;
                 mutliplicateur_tps = 0;
                 progress.value = 100;
-            }
+                }
         }
+        
+
         Debug.Log("You have clicked the button Moins! " + tpsProd.ToString());
         //supprimer un serviteur des deux listes
         //Deplacer serviteur jusqu'a la base
@@ -80,7 +89,8 @@ public class Batiment_Production : MonoBehaviour
             //Debug.Log("petasse" + RessourceManager.Instance.get_Ressource(RessourceManager.MaterialRessourceType.Bois).temps_producion);
          tpsProd = tpsProdDépart;
          RessourceManager.Instance.Ajouter_Material(type_ressource_produite);
-         //Un bonhomme va deposer la ressource au depot
+            //Un bonhomme va deposer la ressource au depot
+           //audioSourceRessource.Play();
       }
         if (tpsProd != tpsProdDépart)
         {
