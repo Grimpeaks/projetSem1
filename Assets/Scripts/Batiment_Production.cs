@@ -8,8 +8,6 @@ public class Batiment_Production : MonoBehaviour
     public Button boutonPlus;
     public Button boutonMoins;
     private int m_nb_serviteur = 0;
-    //private List<string> serviteurs_ajoutes = new List<string>();
-    //private List<string> serviteurs_actifs = new List<string>();
     public Text myText;
     private string m_nb_serviteur_string;
     private float tpsProd;
@@ -18,7 +16,6 @@ public class Batiment_Production : MonoBehaviour
     public RessourceManager.MaterialRessourceType type_ressource_produite;
     private AudioSource audioSourcePlus;
     private AudioSource audioSourceMoins;
-
 
     public Slider progress;
 
@@ -29,7 +26,7 @@ public class Batiment_Production : MonoBehaviour
         progress.maxValue = 100;
         progress.minValue = 0;
         progress.value = 100;
-        tpsProdDépart = RessourceManager.Instance.get_Temps_Production(type_ressource_produite);
+        tpsProdDépart = RessourceManager.Instance.get_Ressource(type_ressource_produite).temps_producion;
         tpsProd = tpsProdDépart;
         audioSourcePlus = boutonPlus.GetComponent<AudioSource>();
         audioSourceMoins = boutonMoins.GetComponent<AudioSource>();
@@ -80,6 +77,7 @@ public class Batiment_Production : MonoBehaviour
       tpsProd -= Time.deltaTime*mutliplicateur_tps;
       if (tpsProd <= 0)
       {
+            //Debug.Log("petasse" + RessourceManager.Instance.get_Ressource(RessourceManager.MaterialRessourceType.Bois).temps_producion);
          tpsProd = tpsProdDépart;
          RessourceManager.Instance.Ajouter_Material(type_ressource_produite);
          //Un bonhomme va deposer la ressource au depot
