@@ -4012,7 +4012,7 @@ MonoBehaviour:
   boutonPlus: {fileID: 1438934582}
   boutonMoins: {fileID: 1069470346}
   myText: {fileID: 934781797}
-  type_ressource_produite: 0
+  type_ressource_produite: 1
   audioSourcePlus: {fileID: 1329076539}
   audioSourceMoins: {fileID: 1204961377}
   audioSourceRessource: {fileID: 305101024}

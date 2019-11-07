@@ -7,12 +7,14 @@ public class RessourceManager : Singleton<RessourceManager>
 {
     public enum MaterialRessourceType
     {
+        None,
         Bois,
         Roche,
         Metal
     }
     public enum WeaponRessourceType
     {
+        None,
         Lance,
         Epee
     }
@@ -59,45 +61,46 @@ public class RessourceManager : Singleton<RessourceManager>
     private RessourceManager()
     {
     }
-    public void Ajouter(MaterialRessourceType typeM =  0, WeaponRessourceType typeA =0 ,uint nb = 1)
+    public void Ajouter(MaterialRessourceType typeM = MaterialRessourceType.None, WeaponRessourceType typeA = WeaponRessourceType.None, uint nb = 1)
     {
-        if(!(typeM==0 && typeA == 0) && (typeM == 0 && typeA == 0))
+        if ((typeM == MaterialRessourceType.None && typeA == WeaponRessourceType.None))
         {
-            if (typeA == 0)
+            return;
+        }
+        if (typeA == WeaponRessourceType.None)
+        {
+            Ressource r = m_dictionnaire_ressoucres[typeM];
+            r.nb += nb;
+            m_dictionnaire_ressoucres.Remove(typeM);
+            m_dictionnaire_ressoucres[typeM] = r;
+        }
+        else if (typeM == MaterialRessourceType.None)
+        {
+            Arme r = m_dictionnaire_armes[typeA];
+            r.nb += nb;
+            m_dictionnaire_armes.Remove(typeA);
+            m_dictionnaire_armes[typeA] = r;
+
+        } 
+    }
+    public void Suprrimer(MaterialRessourceType typeM = MaterialRessourceType.None, WeaponRessourceType typeA = WeaponRessourceType.None, uint nb = 1)
+    {
+        if ((typeM == MaterialRessourceType.None && typeA == WeaponRessourceType.None))
+        {
+            return;
+        }
+        if (typeA == WeaponRessourceType.None)
+        {
+            Ressource r = m_dictionnaire_ressoucres[typeM];
+            if (r.nb >= 1)
             {
-                Ressource r = m_dictionnaire_ressoucres[typeM];
-                r.nb += nb;
+                r.nb -= nb;
                 m_dictionnaire_ressoucres.Remove(typeM);
                 m_dictionnaire_ressoucres[typeM] = r;
             }
-            else
-            {
-                Arme r = m_dictionnaire_armes[typeA];
-                r.nb += nb;
-                m_dictionnaire_armes.Remove(typeA);
-                m_dictionnaire_armes[typeA] = r;
-
-            }
-           
         }
-       
-    }
-    public void Suprrimer(MaterialRessourceType typeM = 0, WeaponRessourceType typeA = 0, uint nb = 1)
-    {
-        if (!(typeM == 0 && typeA == 0) && (typeM == 0 && typeA == 0))
+        else if (typeM == MaterialRessourceType.None)
         {
-            if (typeA == 0)
-            {
-                Ressource r = m_dictionnaire_ressoucres[typeM];
-                if (r.nb >= 1)
-                {
-                    r.nb -= nb;
-                    m_dictionnaire_ressoucres.Remove(typeM);
-                    m_dictionnaire_ressoucres[typeM] = r;
-                }
-            }
-            else
-            {
                 Arme r = m_dictionnaire_armes[typeA];
                 if (r.nb >= 1)
                 {
@@ -105,11 +108,7 @@ public class RessourceManager : Singleton<RessourceManager>
                     m_dictionnaire_armes.Remove(typeA);
                     m_dictionnaire_armes[typeA] = r;
                 }
-
-            }
-
         }
-       
     }
     public Ressource get_Ressource(MaterialRessourceType type)
     {
