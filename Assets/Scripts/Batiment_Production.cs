@@ -15,26 +15,32 @@ public class Batiment_Production : MonoBehaviour
     private float tpsProdDépart;
     private float mutliplicateur_tps = 0.0f;
     public RessourceManager.MaterialRessourceType type_ressource_produite;
-    private AudioSource audioSourcePlus;
-    private AudioSource audioSourceMoins;
-    private AudioSource audioSou_Serviteurs;
+    public AudioSource audioSourcePlus;
+    public AudioSource audioSourceMoins;
+    public AudioSource audioSourceRessource;
+    public AudioSource audioSourceErreur;
     //private AudioSource audioSourceRessource = RessourcesBati;
 
     public Slider progress;
 
     void Start()
     {
+        Debug.Log(tpsProdDépart);
         boutonPlus.onClick.AddListener(OnClickPlus);
         boutonMoins.onClick.AddListener(OnClickMoins);
         progress.maxValue = 100;
         progress.minValue = 0;
         progress.value = 100;
         tpsProdDépart = RessourceManager.Instance.get_Ressource(type_ressource_produite).temps_producion;
+        //tpsProdDépart = 20;
         tpsProd = tpsProdDépart;
-        audioSourcePlus = boutonPlus.GetComponent<AudioSource>();
-        audioSourceMoins = boutonMoins.GetComponent<AudioSource>();
+        //audioSourcePlus = boutonPlus.GetComponent<AudioSource>();
+        //audioSourceMoins = boutonMoins.GetComponent<AudioSource>();
+        
         //audioSou_Serviteurs = GameObject.Find("pancarte_Serviteur").GetComponent<AudioSource>();
     }
+
+    
 
     // void Oncollision(){ ajouter serviteur a liste serviteurs_actifs}
     void OnClickPlus()
@@ -44,20 +50,22 @@ public class Batiment_Production : MonoBehaviour
         m_nb_serviteur += 1;
         mutliplicateur_tps += 0.5f;
 
-        Debug.Log("You have clicked the button Plus! " + tpsProd.ToString());
+        //Debug.Log("You have clicked the button Plus! " + tpsProd.ToString());
         //Choisir un serviteur a ajouter dans la liste serviteurs_ajoutes
         //Deplacer serviteur jusqu'au batiment
     }
 
     void OnClickMoins()
     {
-        audioSourceMoins.Play();
+        
         if (m_nb_serviteur > 0)
         {
+            audioSourceMoins.Play();
             m_nb_serviteur -= 1;
             mutliplicateur_tps -= 0.5f;
 
             if (m_nb_serviteur <= 0) {
+                audioSourceErreur.Play();
                 tpsProd = tpsProdDépart;
                 mutliplicateur_tps = 0;
                 progress.value = 100;
@@ -65,7 +73,7 @@ public class Batiment_Production : MonoBehaviour
         }
         
 
-        Debug.Log("You have clicked the button Moins! " + tpsProd.ToString());
+        //Debug.Log("You have clicked the button Moins! " + tpsProd.ToString());
         //supprimer un serviteur des deux listes
         //Deplacer serviteur jusqu'a la base
     }
@@ -74,7 +82,9 @@ public class Batiment_Production : MonoBehaviour
     {
         DisplayServiteur();
         Produire();
+        //tpsProdDépart = RessourceManager.Instance.get_Ressource(type_ressource_produite).temps_producion;
     }
+
     void DisplayServiteur()
     {
        myText.text = m_nb_serviteur_string;
@@ -86,11 +96,11 @@ public class Batiment_Production : MonoBehaviour
       tpsProd -= Time.deltaTime*mutliplicateur_tps;
       if (tpsProd <= 0)
       {
-            //Debug.Log("petasse" + RessourceManager.Instance.get_Ressource(RessourceManager.MaterialRessourceType.Bois).temps_producion);
+            //Debug.Log("tasse" + RessourceManager.Instance.get_Ressource(RessourceManager.MaterialRessourceType.Bois).temps_producion);
          tpsProd = tpsProdDépart;
          RessourceManager.Instance.Ajouter_Material(type_ressource_produite);
             //Un bonhomme va deposer la ressource au depot
-           //audioSourceRessource.Play();
+         audioSourceRessource.Play();
       }
         if (tpsProd != tpsProdDépart)
         {

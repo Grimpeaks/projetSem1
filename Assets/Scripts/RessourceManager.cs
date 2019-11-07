@@ -17,7 +17,7 @@ public class RessourceManager : Singleton<RessourceManager>
     public Ressource[] ressources;
     private int m_max_ressource=15;
     private Dictionary<RessourceManager.MaterialRessourceType, Ressource> m_dictionnaire = new Dictionary<RessourceManager.MaterialRessourceType, Ressource>();
-    //public Dictionary<RessourceManager.MaterialRessourceType, Sprite> m_dictionnaire_Images;
+
     public enum MaterialRessourceType 
     {
         Bois,
@@ -79,7 +79,7 @@ public class RessourceManager : Singleton<RessourceManager>
     }
 
     void Start()
-    {
+    {  
         foreach (Ressource ress in ressources)
         {
             m_dictionnaire.Add(ress.type, ress);
