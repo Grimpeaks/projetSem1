@@ -98,7 +98,7 @@ public class Batiment_Production : MonoBehaviour
       {
             //Debug.Log("tasse" + RessourceManager.Instance.get_Ressource(RessourceManager.MaterialRessourceType.Bois).temps_producion);
          tpsProd = tpsProdDépart;
-         RessourceManager.Instance.Ajouter_Material(type_ressource_produite);
+         RessourceManager.Instance.Ajouter(type_ressource_produite);
             //Un bonhomme va deposer la ressource au depot
          audioSourceRessource.Play();
       }
