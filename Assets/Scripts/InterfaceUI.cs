@@ -16,8 +16,8 @@ public class InterfaceUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        myCanvas = GameObject.Find("CanvasMenu_Bois").GetComponent<Canvas>();
-        myText = GameObject.Find("TextCanvas").GetComponent<Text>();
+        //myCanvas = GameObject.Find("CanvasMenu_Bois").GetComponent<Canvas>();
+        //myText = GameObject.Find("TextCanvas").GetComponent<Text>();
         myText.color = Color.clear;
         Cursor.visible = true;
 
