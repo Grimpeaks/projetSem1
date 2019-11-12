@@ -53,7 +53,10 @@ public class RessourceManager : Singleton<RessourceManager>
     private Dictionary<RessourceManager.MaterialRessourceType, Ressource> m_dictionnaire_ressoucres = new Dictionary<RessourceManager.MaterialRessourceType, Ressource>();
     private Dictionary<RessourceManager.WeaponRessourceType, Arme> m_dictionnaire_armes = new Dictionary<RessourceManager.WeaponRessourceType, Arme>();
 
-   
+    public Dictionary<RessourceManager.WeaponRessourceType, Arme> get_All_Weapon()
+    {
+        return this.m_dictionnaire_armes;
+    }
     public int get_Max_Ressource()
     {
         return m_max_ressource;
@@ -61,27 +64,20 @@ public class RessourceManager : Singleton<RessourceManager>
     private RessourceManager()
     {
     }
-    public void Ajouter(MaterialRessourceType typeM = MaterialRessourceType.None, WeaponRessourceType typeA = WeaponRessourceType.None, uint nb = 1)
-    {
-        if ((typeM == MaterialRessourceType.None && typeA == WeaponRessourceType.None))
-        {
-            return;
-        }
-        if (typeA == WeaponRessourceType.None)
-        {
+    public void Ajouter(MaterialRessourceType typeM, uint nb = 1)
+    {     
             Ressource r = m_dictionnaire_ressoucres[typeM];
             r.nb += nb;
             m_dictionnaire_ressoucres.Remove(typeM);
-            m_dictionnaire_ressoucres[typeM] = r;
-        }
-        else if (typeM == MaterialRessourceType.None)
-        {
+            m_dictionnaire_ressoucres[typeM] = r;         
+    }
+
+    public void Ajouter(WeaponRessourceType typeA, uint nb = 1)
+    {
             Arme r = m_dictionnaire_armes[typeA];
             r.nb += nb;
             m_dictionnaire_armes.Remove(typeA);
             m_dictionnaire_armes[typeA] = r;
-
-        } 
     }
     public void Suprrimer(MaterialRessourceType typeM = MaterialRessourceType.None, WeaponRessourceType typeA = WeaponRessourceType.None, uint nb = 1)
     {
