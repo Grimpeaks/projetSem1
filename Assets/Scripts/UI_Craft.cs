@@ -7,11 +7,15 @@ using UnityEngine.UI;
 public class UI_Craft : MonoBehaviour
 {
     public GameObject prefab;
+    public GameObject UI;
+    public Button close;
     
     void Start()
     {
         Populate();
-        
+        close.onClick.AddListener(OnclickClose);
+        //Canvas c = GetComponentInParent<Canvas>();
+        //c.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -24,7 +28,6 @@ public class UI_Craft : MonoBehaviour
     {
         GameObject newObj;
         foreach(RessourceManager.WeaponRessourceType weapon in Enum.GetValues(typeof(RessourceManager.WeaponRessourceType)))
-        //for(int i =0; i<10;i++)
         {
             if(weapon != RessourceManager.WeaponRessourceType.None)
             {
@@ -32,14 +35,19 @@ public class UI_Craft : MonoBehaviour
                 newObj.GetComponent<Button>().image.sprite = RessourceManager.Instance.get_Arme(weapon).image;
                 newObj.GetComponent<Button>().GetComponentInChildren<Text>().text = "";
                 newObj.GetComponent<Button>().onClick.AddListener(delegate { OnclickArme(weapon); });
-
+               
             }
         }
     }
 
     public void OnclickArme(RessourceManager.WeaponRessourceType type)
     {
-        Debug.Log(type);
+        UI.GetComponentInChildren<UI_Craft_ressources>().Afficher_Ressources_Necessaires(type);
+    }
 
+    public void OnclickClose()
+    {
+        Canvas c = GetComponentInParent<Canvas>();
+        c.gameObject.SetActive(false);
     }
 }
