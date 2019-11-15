@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_Craft : MonoBehaviour
+public class UI_Craft_Armes : MonoBehaviour
 {
     public GameObject prefab;
     public GameObject UI;
