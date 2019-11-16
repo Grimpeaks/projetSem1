@@ -14,8 +14,8 @@ public class UI_Craft_Armes : MonoBehaviour
     {
         Populate();
         close.onClick.AddListener(OnclickClose);
-        //Canvas c = GetComponentInParent<Canvas>();
-        //c.gameObject.SetActive(false);
+        Canvas c = GetComponentInParent<Canvas>();
+        c.gameObject.SetActive(false);
     }
 
     // Update is called once per frame

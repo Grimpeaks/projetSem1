@@ -1,12 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Linq;
 
 public class Batiment_Production_Arme : Batiment_Production
 {
+    public Button boutonProduction;
+    public Canvas UICraft;
+
     private RessourceManager.WeaponRessourceType m_type_ressource_produite = RessourceManager.WeaponRessourceType.None;
     private int nb_to_create =0;
+
+
     public uint Calcul_Max_Production(RessourceManager.WeaponRessourceType type)
     {
         List<uint> liste_max = new List<uint>();
@@ -59,6 +65,12 @@ public class Batiment_Production_Arme : Batiment_Production
     new void Start()
     {
         base.Start();
+        boutonProduction.onClick.AddListener(open);
+    }
+
+    public void open()
+    {
+        UICraft.gameObject.SetActive(true);
     }
 
 }
