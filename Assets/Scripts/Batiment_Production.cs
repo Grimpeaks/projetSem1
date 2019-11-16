@@ -13,8 +13,6 @@ public abstract class Batiment_Production : MonoBehaviour
     protected float tpsProd;
     protected float tpsProdDépart;
     protected float mutliplicateur_tps = 0.0f;
-    //mettre script enfant
-   // public RessourceManager.MaterialRessourceType type_ressource_produite;
     public AudioSource audioSourcePlus;
     public AudioSource audioSourceMoins;
     public AudioSource audioSourceRessource;
@@ -36,14 +34,9 @@ public abstract class Batiment_Production : MonoBehaviour
     }
     void OnClickPlus()
     {
-
         audioSourcePlus.Play();
         m_nb_serviteur += 1;
         mutliplicateur_tps += 0.5f;
-
-        //Debug.Log("You have clicked the button Plus! " + tpsProd.ToString());
-        //Choisir un serviteur a ajouter dans la liste serviteurs_ajoutes
-        //Deplacer serviteur jusqu'au batiment
     }
     void OnClickMoins()
     {
@@ -72,7 +65,6 @@ public abstract class Batiment_Production : MonoBehaviour
     {
         DisplayServiteur();
         Produire();
-        //tpsProdDépart = RessourceManager.Instance.get_Ressource(type_ressource_produite).temps_producion;
     }
 
     void DisplayServiteur()

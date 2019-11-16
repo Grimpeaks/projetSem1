@@ -71,7 +71,6 @@ public class RessourceManager : Singleton<RessourceManager>
             m_dictionnaire_ressoucres.Remove(typeM);
             m_dictionnaire_ressoucres[typeM] = r;         
     }
-
     public void Ajouter(WeaponRessourceType typeA, uint nb = 1)
     {
             Arme r = m_dictionnaire_armes[typeA];
@@ -79,32 +78,26 @@ public class RessourceManager : Singleton<RessourceManager>
             m_dictionnaire_armes.Remove(typeA);
             m_dictionnaire_armes[typeA] = r;
     }
-    public void Suprrimer(MaterialRessourceType typeM = MaterialRessourceType.None, WeaponRessourceType typeA = WeaponRessourceType.None, uint nb = 1)
+    public void Supprimer(MaterialRessourceType typeM, uint nb = 1)
     {
-        if ((typeM == MaterialRessourceType.None && typeA == WeaponRessourceType.None))
+        Ressource r = m_dictionnaire_ressoucres[typeM];
+        r.nb -= nb;
+        if (r.nb >= 0)
         {
-            return;
+            m_dictionnaire_ressoucres.Remove(typeM);
+            m_dictionnaire_ressoucres[typeM] = r;
         }
-        if (typeA == WeaponRessourceType.None)
+    }
+    public void Supprimer(WeaponRessourceType typeA, uint nb = 1)
+    {
+        Arme r = m_dictionnaire_armes[typeA];
+        r.nb -= nb;
+        if (r.nb >= 0)
         {
-            Ressource r = m_dictionnaire_ressoucres[typeM];
-            if (r.nb >= 1)
-            {
-                r.nb -= nb;
-                m_dictionnaire_ressoucres.Remove(typeM);
-                m_dictionnaire_ressoucres[typeM] = r;
-            }
+            m_dictionnaire_armes.Remove(typeA);
+            m_dictionnaire_armes[typeA] = r;
         }
-        else if (typeM == MaterialRessourceType.None)
-        {
-                Arme r = m_dictionnaire_armes[typeA];
-                if (r.nb >= 1)
-                {
-                    r.nb += nb;
-                    m_dictionnaire_armes.Remove(typeA);
-                    m_dictionnaire_armes[typeA] = r;
-                }
-        }
+       
     }
     public Ressource get_Ressource(MaterialRessourceType type)
     {

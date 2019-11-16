@@ -15,7 +15,9 @@ public class UI_Craft_ressources : MonoBehaviour
     public Button boutonAjout;
     public Button boutonEnlever;
     public Text text_nb_to_create;
-    
+    public Button bouton_produire;
+    public GameObject m_base;
+
     private RessourceManager.WeaponRessourceType m_type = RessourceManager.WeaponRessourceType.None;
     private int nb_to_create=0;
     private uint max_to_create = 0;
@@ -24,10 +26,22 @@ public class UI_Craft_ressources : MonoBehaviour
     {
         boutonAjout.interactable = false;
         boutonEnlever.interactable = false;
-        boutonAjout.onClick.AddListener(delegate { Set_nb_to_create(); });
-        boutonEnlever.onClick.AddListener(delegate { Set_nb_to_create(true); });
+        boutonAjout.onClick.AddListener(delegate { Set_nb_to_create(1); });
+        boutonEnlever.onClick.AddListener(delegate { Set_nb_to_create(-1); });
+        bouton_produire.onClick.AddListener(Produire);
     }
 
+    public void Produire()
+    {
+        m_base.GetComponent<Batiment_Production_Arme>().set_Production(m_type,nb_to_create);
+        foreach (RessourceManager.Ressources_necessaire r in RessourceManager.Instance.get_Arme(m_type).ressources_necessaire)
+        {
+            uint mult = r.nb*(uint)nb_to_create;
+            RessourceManager.Instance.Supprimer(r.type, mult);
+        }
+
+
+    }
     public bool PeutEtreActif(bool btn)
     {
         if (btn)
@@ -54,39 +68,27 @@ public class UI_Craft_ressources : MonoBehaviour
     }
     void Update()
     {
-       if(m_type!= RessourceManager.WeaponRessourceType.None)
-        {
-            TextBubble.text = "Vous pouvez créer au maximum " + Calcul_Max_Production() + " " + m_type;
-        
-            max_to_create = Calcul_Max_Production();
-            boutonAjout.interactable = PeutEtreActif(true);
-            boutonEnlever.interactable = PeutEtreActif(false);
-        }
+        Update_Max_Production();
     }
-    void Set_nb_to_create(bool enlever=false)
+    void Set_nb_to_create(int nb)
     {
-        int nb=0;
-        if (enlever && nb_to_create>0){nb = -1;}
-        else if(nb_to_create<max_to_create){ nb = 1; }
         nb_to_create += nb;
         text_nb_to_create.text = nb_to_create.ToString();
     }
-    public uint Calcul_Max_Production()
+    public void Update_Max_Production()
     {
-       List<uint> liste_max = new List<uint>();
-       RessourceManager.Ressources_necessaire[] ressources_n = RessourceManager.Instance.get_Arme(m_type).ressources_necessaire;
-       foreach (RessourceManager.Ressources_necessaire ressource in ressources_n)
+        if (m_type != RessourceManager.WeaponRessourceType.None)
         {
-            uint nb_in_stock = RessourceManager.Instance.get_Ressource(ressource.type).nb;
-            if (nb_in_stock <= 0)
-            {
-                return 0;
-            }
-            uint nb = nb_in_stock / ressource.nb ;
-            liste_max.Add(nb);
+            max_to_create = m_base.GetComponent<Batiment_Production_Arme>().Calcul_Max_Production(m_type);
+
+            TextBubble.text = "Vous pouvez créer au maximum " + max_to_create + " " + m_type;
+
+            boutonAjout.interactable = PeutEtreActif(true);
+            boutonEnlever.interactable = PeutEtreActif(false);
+            if (nb_to_create > max_to_create) { Set_nb_to_create(-((int)nb_to_create - (int)max_to_create)); }
+            Debug.Log((int)nb_to_create );
+            Debug.Log((int)max_to_create);
         }
-        uint max = liste_max.Min();
-        return max;
     }
     public void Populate()
     {

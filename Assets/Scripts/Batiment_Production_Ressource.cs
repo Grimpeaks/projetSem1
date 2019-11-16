@@ -21,8 +21,10 @@ public class Batiment_Production_Ressource : Batiment_Production
         }
     }
 
+
+    
     // Start is called before the first frame update
-    void Start()
+    new void Start()
     {
         base.Start();
         tpsProdDépart = RessourceManager.Instance.get_Ressource(type_ressource_produite).temps_producion;
