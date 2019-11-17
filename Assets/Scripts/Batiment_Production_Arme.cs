@@ -6,6 +6,7 @@ using System.Linq;
 
 public class Batiment_Production_Arme : Batiment_Production
 {
+    public AudioSource audioSourceCreer;
     public Button boutonProduction;
     public Canvas UICraft;
     
@@ -89,6 +90,7 @@ public class Batiment_Production_Arme : Batiment_Production
 
     public void open()
     {
+        audioSourceCreer.Play();
         UICraft.gameObject.SetActive(true);
     }
 
