@@ -8,6 +8,7 @@ public class Batiment_Production_Arme : Batiment_Production
 {
     public Button boutonProduction;
     public Canvas UICraft;
+    
 
     private RessourceManager.WeaponRessourceType m_type_ressource_produite = RessourceManager.WeaponRessourceType.None;
     private int nb_to_create =0;
@@ -34,7 +35,7 @@ public class Batiment_Production_Arme : Batiment_Production
     {
         if (m_type_ressource_produite != RessourceManager.WeaponRessourceType.None)
         {
-            if (Calcul_Max_Production(m_type_ressource_produite) > 0 && nb_to_create!=0) { 
+            if (nb_to_create!=0) { 
                 tpsProd -= Time.deltaTime * mutliplicateur_tps;       
                 if (tpsProd <= 0)
                 {
@@ -59,9 +60,27 @@ public class Batiment_Production_Arme : Batiment_Production
             nb_to_create = nb;
             tpsProdDépart = RessourceManager.Instance.get_Arme(m_type_ressource_produite).temps_producion;
             tpsProd = tpsProdDépart;
+            //this.progress.GetComponentInChildren<Image>().sprite = RessourceManager.Instance.get_Arme(type).image;
+            Image[] images = progress.GetComponentsInChildren<Image>();
+            for(int i =0; i<images.Length; i++)
+            {
+                images[i].sprite = RessourceManager.Instance.get_Arme(type).image;
+                if (i == 0)
+                {
+                    images[i].color =new Color(0.235f, 0.235f, 0.235f);
+                }
+            }
         }     
     }
-    
+    new void Update()
+    {
+        base.Update();
+        if (nb_to_create <= 0)
+        {
+            boutonProduction.interactable = true;
+        }
+        else { boutonProduction.interactable = false; }
+    }
     new void Start()
     {
         base.Start();

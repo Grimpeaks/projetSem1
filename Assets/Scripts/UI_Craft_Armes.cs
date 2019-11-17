@@ -31,10 +31,14 @@ public class UI_Craft_Armes : MonoBehaviour
         {
             if(weapon != RessourceManager.WeaponRessourceType.None)
             {
+                RessourceManager.Arme arme = RessourceManager.Instance.get_Arme(weapon);
                 newObj = (GameObject)Instantiate(prefab, transform);
-                newObj.GetComponent<Button>().image.sprite = RessourceManager.Instance.get_Arme(weapon).image;
+                newObj.GetComponent<Button>().image.sprite = arme.image_UI_Base;
                 newObj.GetComponent<Button>().GetComponentInChildren<Text>().text = "";
                 newObj.GetComponent<Button>().onClick.AddListener(delegate { OnclickArme(weapon); });
+                SpriteState s = new SpriteState();
+                s.selectedSprite = arme.image_UI_Selected;
+                newObj.GetComponent<Button>().spriteState = s;
                
             }
         }

@@ -86,8 +86,6 @@ public class UI_Craft_ressources : MonoBehaviour
             boutonAjout.interactable = PeutEtreActif(true);
             boutonEnlever.interactable = PeutEtreActif(false);
             if (nb_to_create > max_to_create) { Set_nb_to_create(-((int)nb_to_create - (int)max_to_create)); }
-            Debug.Log((int)nb_to_create );
-            Debug.Log((int)max_to_create);
         }
     }
     public void Populate()

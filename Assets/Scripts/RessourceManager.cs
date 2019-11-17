@@ -40,6 +40,8 @@ public class RessourceManager : Singleton<RessourceManager>
         public WeaponRessourceType type;
         public float temps_producion;
         public Sprite image;
+        public Sprite image_UI_Base;
+        public Sprite image_UI_Selected;
         public uint nb;
         public uint prix;
         public uint puissance;

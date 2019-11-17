@@ -17,8 +17,6 @@ public abstract class Batiment_Production : MonoBehaviour
     public AudioSource audioSourceMoins;
     public AudioSource audioSourceRessource;
     public AudioSource audioSourceErreur;
-    //private AudioSource audioSourceRessource = RessourcesBati;
-
     public Slider progress;
 
     protected void Start()
@@ -28,9 +26,7 @@ public abstract class Batiment_Production : MonoBehaviour
         progress.maxValue = 100;
         progress.minValue = 0;
         progress.value = 100;
-        //mettre ça dans les scripts enfants en fonction du type 
-        //tpsProdDépart = RessourceManager.Instance.get_Ressource(type_ressource_produite).temps_producion;
-        //tpsProd = tpsProdDépart; 
+        progress.interactable = false;
     }
     void OnClickPlus()
     {
@@ -61,7 +57,7 @@ public abstract class Batiment_Production : MonoBehaviour
         //Deplacer serviteur jusqu'a la base
     }
 
-    void Update()
+    protected void Update()
     {
         DisplayServiteur();
         Produire();
