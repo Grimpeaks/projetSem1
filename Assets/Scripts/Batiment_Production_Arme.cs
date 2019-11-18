@@ -9,6 +9,7 @@ public class Batiment_Production_Arme : Batiment_Production
     public AudioSource audioSourceCreer;
     public Button boutonProduction;
     public Canvas UICraft;
+    public SpriteRenderer bubble;
     
 
     private RessourceManager.WeaponRessourceType m_type_ressource_produite = RessourceManager.WeaponRessourceType.None;
@@ -50,6 +51,10 @@ public class Batiment_Production_Arme : Batiment_Production
                     progress.value = 100 - ((tpsProd / tpsProdDépart) * 100);
                 }
             }
+            else
+            {
+                set_Production(RessourceManager.WeaponRessourceType.None, 0);
+            }
         }
     }
 
@@ -61,7 +66,6 @@ public class Batiment_Production_Arme : Batiment_Production
             nb_to_create = nb;
             tpsProdDépart = RessourceManager.Instance.get_Arme(m_type_ressource_produite).temps_producion;
             tpsProd = tpsProdDépart;
-            //this.progress.GetComponentInChildren<Image>().sprite = RessourceManager.Instance.get_Arme(type).image;
             Image[] images = progress.GetComponentsInChildren<Image>();
             for(int i =0; i<images.Length; i++)
             {
@@ -71,6 +75,9 @@ public class Batiment_Production_Arme : Batiment_Production
                     images[i].color =new Color(0.235f, 0.235f, 0.235f);
                 }
             }
+
+            if (m_type_ressource_produite == RessourceManager.WeaponRessourceType.None){bubble.gameObject.SetActive(true);}
+            else { bubble.gameObject.SetActive(false); }
         }     
     }
     new void Update()
@@ -81,6 +88,8 @@ public class Batiment_Production_Arme : Batiment_Production
             boutonProduction.interactable = true;
         }
         else { boutonProduction.interactable = false; }
+
+        
     }
     new void Start()
     {
@@ -91,7 +100,7 @@ public class Batiment_Production_Arme : Batiment_Production
     public void open()
     {
         audioSourceCreer.Play();
-        UICraft.gameObject.SetActive(true);
+        UICraft.gameObject.SetActive(true);        
     }
 
 }

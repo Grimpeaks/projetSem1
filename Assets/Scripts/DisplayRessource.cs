@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DisplayRessource : MonoBehaviour
+public abstract class DisplayRessource : MonoBehaviour
 {
-    string nb;
-    public RessourceManager.MaterialRessourceType type;
+    protected string nb;
+    //public RessourceManager.MaterialRessourceType type;
     public Text myText;
    
 
@@ -18,13 +18,9 @@ public class DisplayRessource : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        nb = RessourceManager.Instance.get_Ressource(type).nb.ToString();
-        DisplayInfo();
-    }
+    protected abstract void Update();
 
-    void DisplayInfo()
+    protected void DisplayInfo()
     {
         myText.text = nb;
     }
