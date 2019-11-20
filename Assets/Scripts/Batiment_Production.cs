@@ -33,6 +33,7 @@ public abstract class Batiment_Production : MonoBehaviour
         audioSourcePlus.Play();
         m_nb_serviteur += 1;
         mutliplicateur_tps += 0.5f;
+        RessourceManager.Instance.utiliser_serviteur();
     }
     void OnClickMoins()
     {
@@ -42,15 +43,16 @@ public abstract class Batiment_Production : MonoBehaviour
             audioSourceMoins.Play();
             m_nb_serviteur -= 1;
             mutliplicateur_tps -= 0.5f;
-
-            if (m_nb_serviteur <= 0) {
-                audioSourceErreur.Play();
-                tpsProd = tpsProdDépart;
-                mutliplicateur_tps = 0;
-                progress.value = 100;
-                }
+            RessourceManager.Instance.utiliser_serviteur(true);          
         }
-        
+        if (m_nb_serviteur <= 0)
+        {
+            audioSourceErreur.Play();
+            tpsProd = tpsProdDépart;
+            mutliplicateur_tps = 0;
+            progress.value = 100;
+        }
+
 
         //Debug.Log("You have clicked the button Moins! " + tpsProd.ToString());
         //supprimer un serviteur des deux listes
@@ -61,6 +63,18 @@ public abstract class Batiment_Production : MonoBehaviour
     {
         DisplayServiteur();
         Produire();
+
+        if (m_nb_serviteur <= 0)
+        {
+            boutonMoins.interactable = false;
+            boutonPlus.interactable = true;
+        }
+        if (RessourceManager.Instance.get_Nb_Serviteurs_restants() <= 0)
+        {
+            boutonPlus.interactable = false;
+            boutonMoins.interactable = true;
+        }
+        else { boutonPlus.interactable = true; boutonMoins.interactable = true; }
     }
 
     void DisplayServiteur()

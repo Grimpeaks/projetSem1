@@ -52,12 +52,24 @@ public class RessourceManager : Singleton<RessourceManager>
     public Ressource[] ressources;
     public Arme[] armes;
     private int m_max_ressource=15;
+    private int nb_serviteurs_utilise=0;
+    private int nb_Max_serviteurs=5;
     private Dictionary<RessourceManager.MaterialRessourceType, Ressource> m_dictionnaire_ressoucres = new Dictionary<RessourceManager.MaterialRessourceType, Ressource>();
     private Dictionary<RessourceManager.WeaponRessourceType, Arme> m_dictionnaire_armes = new Dictionary<RessourceManager.WeaponRessourceType, Arme>();
 
     public Dictionary<RessourceManager.WeaponRessourceType, Arme> get_All_Weapon()
     {
         return this.m_dictionnaire_armes;
+    }
+    public int get_Nb_Serviteurs_restants()
+    {
+        return nb_Max_serviteurs - nb_serviteurs_utilise;
+    }
+    public void utiliser_serviteur(bool rendre=false)
+    {
+        int nb = 1;
+        if (rendre) { nb = -1; }
+        nb_serviteurs_utilise += nb;
     }
     public int get_Max_Ressource()
     {

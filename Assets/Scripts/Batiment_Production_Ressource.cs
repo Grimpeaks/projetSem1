@@ -20,8 +20,6 @@ public class Batiment_Production_Ressource : Batiment_Production
             progress.value = 100 - ((tpsProd / tpsProdDépart) * 100);
         }
     }
-
-
     
     // Start is called before the first frame update
     new void Start()
