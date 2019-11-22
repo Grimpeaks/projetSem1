@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class Batiment_Production : MonoBehaviour
+public abstract class Batiment_Production : Interactable
 {
     public Button boutonPlus;
     public Button boutonMoins;
@@ -18,6 +18,8 @@ public abstract class Batiment_Production : MonoBehaviour
     public AudioSource audioSourceRessource;
     public AudioSource audioSourceErreur;
     public Slider progress;
+    public GameObject prefab_serviteur;
+    
 
     protected void Start()
     {
@@ -27,6 +29,11 @@ public abstract class Batiment_Production : MonoBehaviour
         progress.minValue = 0;
         progress.value = 100;
         progress.interactable = false;
+       //serviteur.GetComponent<Serviteur>().set_Target(RessourceManager.Instance.get_target(RessourceManager.Target.house));
+    }
+    public override void interagir(GameObject serviteur) 
+    {
+        Destroy(serviteur);
     }
     void OnClickPlus()
     {
@@ -76,14 +83,12 @@ public abstract class Batiment_Production : MonoBehaviour
         }
         else { boutonPlus.interactable = true; boutonMoins.interactable = true; }
     }
-
     void DisplayServiteur()
     {
        myText.text = m_nb_serviteur_string;
         m_nb_serviteur_string = m_nb_serviteur.ToString();
     }
 
-    //mettre abstract et coder cette fonction dans les script enfants
     public abstract void Produire();
 
   

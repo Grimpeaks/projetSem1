@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Batiment_Production_Ressource : Batiment_Production
 {
     public RessourceManager.MaterialRessourceType type_ressource_produite;
+    public GameObject depot;
 
     public override void Produire()
     {
@@ -12,7 +14,9 @@ public class Batiment_Production_Ressource : Batiment_Production
         if (tpsProd <= 0)
         {
             tpsProd = tpsProdDépart;
-            RessourceManager.Instance.Ajouter(type_ressource_produite);
+            prefab_serviteur.GetComponent<Serviteur>().init(RessourceManager.Instance.get_target(RessourceManager.Instance.get_depot(type_ressource_produite)), this.gameObject,prefab_serviteur);
+            prefab_serviteur.GetComponentInChildren<Image>().sprite = RessourceManager.Instance.get_Ressource(type_ressource_produite).image;
+            Instantiate(prefab_serviteur, new Vector2(transform.position.x, -3.3f), Quaternion.identity);
             audioSourceRessource.Play();
         }
         if (tpsProd != tpsProdDépart)

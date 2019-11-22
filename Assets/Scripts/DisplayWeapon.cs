@@ -8,6 +8,14 @@ public class DisplayWeapon : DisplayRessource
 
     public RessourceManager.WeaponRessourceType type;
 
+    public override void interagir(GameObject serviteur)
+    {
+        //Debug.Log("hello" + this.ToString());
+        //Destroy(serviteur);
+        //RessourceManager.Instance.Ajouter(type);
+        //RessourceManager.Instance.Ajouter(type);
+        //serviteur.GetComponent<Serviteur>().retour();
+    }
     protected override void Update()
     {
         nb = RessourceManager.Instance.get_Arme(type).nb.ToString();

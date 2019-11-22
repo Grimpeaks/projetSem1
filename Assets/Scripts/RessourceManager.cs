@@ -47,13 +47,23 @@ public class RessourceManager : Singleton<RessourceManager>
         public uint puissance;
         public Ressources_necessaire[] ressources_necessaire;
     }
+   
+    public enum Target : int
+    {
+        house = 0,
+        mine = 1,
+        depotBois = 2,
+        depotRoche = 3,
+        depotMetal = 4,
 
+    }
 
+    public GameObject[] targets;
     public Ressource[] ressources;
     public Arme[] armes;
     private int m_max_ressource=15;
     private int nb_serviteurs_utilise=0;
-    private int nb_Max_serviteurs=5;
+    private int nb_Max_serviteurs=15;
     private Dictionary<RessourceManager.MaterialRessourceType, Ressource> m_dictionnaire_ressoucres = new Dictionary<RessourceManager.MaterialRessourceType, Ressource>();
     private Dictionary<RessourceManager.WeaponRessourceType, Arme> m_dictionnaire_armes = new Dictionary<RessourceManager.WeaponRessourceType, Arme>();
 
@@ -64,6 +74,28 @@ public class RessourceManager : Singleton<RessourceManager>
     public int get_Nb_Serviteurs_restants()
     {
         return nb_Max_serviteurs - nb_serviteurs_utilise;
+    }
+
+    public Target get_depot(MaterialRessourceType m)
+    {
+        Target depot = Target.house;
+        switch (m)
+        {
+            case MaterialRessourceType.Bois:
+                depot =Target.depotBois;
+                break;
+            case MaterialRessourceType.Metal:
+                depot = Target.depotMetal;
+                break;
+            case MaterialRessourceType.Roche:
+                depot =Target.depotRoche;
+                break;
+        }
+        return depot;
+    }
+    public GameObject get_target(Target t)
+    {
+        return targets[(int)t];
     }
     public void utiliser_serviteur(bool rendre=false)
     {

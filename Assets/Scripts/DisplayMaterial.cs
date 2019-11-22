@@ -7,7 +7,10 @@ public class DisplayMaterial : DisplayRessource
 {
     public RessourceManager.MaterialRessourceType type;
 
-   
+    public override void interagir(GameObject serviteur)
+    {
+        serviteur.GetComponent<Serviteur>().Agir_Stock(type);
+    }
 
     // Update is called once per frame
     protected override void Update()
