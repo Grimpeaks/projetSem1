@@ -6,13 +6,13 @@ Sprite:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Serviteur_121
+  m_Name: Serviteur_132
   m_Rect:
     serializedVersion: 2
-    x: 83
-    y: 256
-    width: 26
-    height: 49
+    x: 146
+    y: 1282
+    width: 28
+    height: 48
   m_Offset: {x: 0, y: 0}
   m_Border: {x: 0, y: 0, z: 0, w: 0}
   m_PixelsToUnits: 100
@@ -22,7 +22,7 @@ Sprite:
   m_AtlasName: 
   m_PackingTag: 
   m_RenderDataKey:
-    b99366128dd28cf43b00d4b7af8013c3: 3146369635753259843
+    4c2e6731ffc6d364389b5ebe26d868fc: 21300000
   m_AtlasTags: []
   m_SpriteAtlas: {fileID: 0}
   m_RD:
@@ -103,18 +103,18 @@ Sprite:
         format: 0
         dimension: 0
       m_DataSize: 80
-      _typelessdata: b81e05be48e17a3e00000000b81e053e48e17a3e00000000b81e05be48e17abe00000000b81e053e48e17abe00000000c54ecc3d8661683e6227063e8661683ec54ecc3d310c433e6227063e310c433e
+      _typelessdata: 295c0fbe8fc2753e00000000295c0f3e8fc2753e00000000295c0fbe8fc275be00000000295c0f3e8fc275be000000003bb1333e55557d3f6227563e55557d3f3bb1333ec330743f6227563ec330743f
     m_Bindpose: []
     textureRect:
       serializedVersion: 2
-      x: 83
-      y: 256
-      width: 26
-      height: 49
+      x: 146
+      y: 1282
+      width: 28
+      height: 48
     textureRectOffset: {x: 0, y: 0}
     atlasRectOffset: {x: -1, y: -1}
     settingsRaw: 64
-    uvTransform: {x: 100, y: 96, z: 100, w: 280.5}
+    uvTransform: {x: 100, y: 160, z: 100, w: 1306}
     downscaleMultiplier: 1
   m_AtlasRD:
     serializedVersion: 3
@@ -194,26 +194,26 @@ Sprite:
         format: 0
         dimension: 0
       m_DataSize: 80
-      _typelessdata: b81e05be48e17a3e00000000b81e053e48e17a3e00000000b81e05be48e17abe00000000b81e053e48e17abe00000000c54ecc3d8661683e6227063e8661683ec54ecc3d310c433e6227063e310c433e
+      _typelessdata: 295c0fbe8fc2753e00000000295c0f3e8fc2753e00000000295c0fbe8fc275be00000000295c0f3e8fc275be000000003bb1333e55557d3f6227563e55557d3f3bb1333ec330743f6227563ec330743f
     m_Bindpose: []
     textureRect:
       serializedVersion: 2
-      x: 83
-      y: 256
-      width: 26
-      height: 49
+      x: 146
+      y: 1282
+      width: 28
+      height: 48
     textureRectOffset: {x: 0, y: 0}
     atlasRectOffset: {x: -1, y: -1}
     settingsRaw: 64
-    uvTransform: {x: 100, y: 96, z: 100, w: 280.5}
+    uvTransform: {x: 100, y: 160, z: 100, w: 1306}
     downscaleMultiplier: 1
   m_PhysicsShape:
-  - - {x: -0.13, y: 0.24499999}
-    - {x: -0.13, y: -0.235}
-    - {x: -0.11, y: -0.24499999}
-    - {x: 0.099999994, y: -0.24499999}
-    - {x: 0.13, y: -0.235}
-    - {x: 0.13, y: 0.235}
-    - {x: 0.089999996, y: 0.24499999}
+  - - {x: 0.099999994, y: 0.24}
+    - {x: -0.12, y: 0.24}
+    - {x: -0.14, y: 0.22999999}
+    - {x: -0.14, y: -0.24}
+    - {x: 0.14, y: -0.24}
+    - {x: 0.14, y: 0.13}
+    - {x: 0.13, y: 0.19999999}
   m_Bones: []
-  m_SpriteID: 31f573963242b8e42ad8ddf2a7d20992
+  m_SpriteID: e86053abda5aea34cb3859e0ddd15c2d
