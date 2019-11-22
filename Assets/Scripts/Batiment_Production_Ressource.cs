@@ -14,7 +14,7 @@ public class Batiment_Production_Ressource : Batiment_Production
         if (tpsProd <= 0)
         {
             tpsProd = tpsProdDépart;
-            prefab_serviteur.GetComponent<Serviteur>().init(RessourceManager.Instance.get_target(RessourceManager.Target.porteBas), this.gameObject,prefab_serviteur);
+            prefab_serviteur.GetComponent<Serviteur>().init(depot, this.gameObject,prefab_serviteur);
             prefab_serviteur.GetComponentInChildren<Image>().sprite = RessourceManager.Instance.get_Ressource(type_ressource_produite).image;
             Instantiate(prefab_serviteur, new Vector2(transform.position.x, -3.3f), Quaternion.identity);
             audioSourceRessource.Play();
