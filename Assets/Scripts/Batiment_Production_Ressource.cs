@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Batiment_Production_Ressource : Batiment_Production
 {
     public RessourceManager.MaterialRessourceType type_ressource_produite;
-    public GameObject depot;
+    private GameObject depot;
 
     public override void Produire()
     {
@@ -14,7 +14,7 @@ public class Batiment_Production_Ressource : Batiment_Production
         if (tpsProd <= 0)
         {
             tpsProd = tpsProdDépart;
-            prefab_serviteur.GetComponent<Serviteur>().init(RessourceManager.Instance.get_target(RessourceManager.Instance.get_depot(type_ressource_produite)), this.gameObject,prefab_serviteur);
+            prefab_serviteur.GetComponent<Serviteur>().init(RessourceManager.Instance.get_target(RessourceManager.Target.porteBas), this.gameObject,prefab_serviteur);
             prefab_serviteur.GetComponentInChildren<Image>().sprite = RessourceManager.Instance.get_Ressource(type_ressource_produite).image;
             Instantiate(prefab_serviteur, new Vector2(transform.position.x, -3.3f), Quaternion.identity);
             audioSourceRessource.Play();
@@ -31,5 +31,6 @@ public class Batiment_Production_Ressource : Batiment_Production
         base.Start();
         tpsProdDépart = RessourceManager.Instance.get_Ressource(type_ressource_produite).temps_producion;
         tpsProd = tpsProdDépart;
+        this.depot = RessourceManager.Instance.get_target(RessourceManager.Instance.get_depot(type_ressource_produite));
     }
 }

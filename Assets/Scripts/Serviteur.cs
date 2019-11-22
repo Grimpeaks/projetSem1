@@ -93,4 +93,9 @@ public class Serviteur : MonoBehaviour
             animator.SetBool("VersDroite", false);
         }
     }
+
+    public void ouvrirPorte(GameObject destination)
+    {
+        transform.position = destination.transform.position;
+    }
 }

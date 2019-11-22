@@ -55,6 +55,8 @@ public class RessourceManager : Singleton<RessourceManager>
         depotBois = 2,
         depotRoche = 3,
         depotMetal = 4,
+        porteHaut = 5,
+        porteBas = 6,
 
     }
 
