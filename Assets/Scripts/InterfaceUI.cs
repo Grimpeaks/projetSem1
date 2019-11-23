@@ -41,7 +41,6 @@ public class InterfaceUI : MonoBehaviour
 
     }
 
-
     void FadeText()
     {
         if(displayInfo)
@@ -54,11 +53,7 @@ public class InterfaceUI : MonoBehaviour
         {
             myText.color = Color.Lerp(myText.color, Color.clear, fadeTime * Time.deltaTime);
         }
-
-
-
     }
-
 
     void FadeCanvas()
     {

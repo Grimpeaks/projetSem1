@@ -47,7 +47,7 @@ public class RessourceManager : Singleton<RessourceManager>
         public uint puissance;
         public Ressources_necessaire[] ressources_necessaire;
     }
-   
+
     public enum Target : int
     {
         house = 0,
@@ -63,9 +63,9 @@ public class RessourceManager : Singleton<RessourceManager>
     public GameObject[] targets;
     public Ressource[] ressources;
     public Arme[] armes;
-    private int m_max_ressource=15;
-    private int nb_serviteurs_utilise=0;
-    private int nb_Max_serviteurs=15;
+    private int m_max_ressource = 15;
+    private int nb_serviteurs_utilise = 0;
+    private int nb_Max_serviteurs = 15;
     private Dictionary<RessourceManager.MaterialRessourceType, Ressource> m_dictionnaire_ressoucres = new Dictionary<RessourceManager.MaterialRessourceType, Ressource>();
     private Dictionary<RessourceManager.WeaponRessourceType, Arme> m_dictionnaire_armes = new Dictionary<RessourceManager.WeaponRessourceType, Arme>();
 
@@ -84,13 +84,13 @@ public class RessourceManager : Singleton<RessourceManager>
         switch (m)
         {
             case MaterialRessourceType.Bois:
-                depot =Target.depotBois;
+                depot = Target.depotBois;
                 break;
             case MaterialRessourceType.Metal:
                 depot = Target.depotMetal;
                 break;
             case MaterialRessourceType.Roche:
-                depot =Target.depotRoche;
+                depot = Target.depotRoche;
                 break;
         }
         return depot;
@@ -99,7 +99,7 @@ public class RessourceManager : Singleton<RessourceManager>
     {
         return targets[(int)t];
     }
-    public void utiliser_serviteur(bool rendre=false)
+    public void utiliser_serviteur(bool rendre = false)
     {
         int nb = 1;
         if (rendre) { nb = -1; }
@@ -113,18 +113,18 @@ public class RessourceManager : Singleton<RessourceManager>
     {
     }
     public void Ajouter(MaterialRessourceType typeM, uint nb = 1)
-    {     
-            Ressource r = m_dictionnaire_ressoucres[typeM];
-            r.nb += nb;
-            m_dictionnaire_ressoucres.Remove(typeM);
-            m_dictionnaire_ressoucres[typeM] = r;         
+    {
+        Ressource r = m_dictionnaire_ressoucres[typeM];
+        r.nb += nb;
+        m_dictionnaire_ressoucres.Remove(typeM);
+        m_dictionnaire_ressoucres[typeM] = r;
     }
     public void Ajouter(WeaponRessourceType typeA, uint nb = 1)
     {
-            Arme r = m_dictionnaire_armes[typeA];
-            r.nb += nb;
-            m_dictionnaire_armes.Remove(typeA);
-            m_dictionnaire_armes[typeA] = r;
+        Arme r = m_dictionnaire_armes[typeA];
+        r.nb += nb;
+        m_dictionnaire_armes.Remove(typeA);
+        m_dictionnaire_armes[typeA] = r;
     }
     public void Supprimer(MaterialRessourceType typeM, uint nb = 1)
     {
@@ -145,7 +145,7 @@ public class RessourceManager : Singleton<RessourceManager>
             m_dictionnaire_armes.Remove(typeA);
             m_dictionnaire_armes[typeA] = r;
         }
-       
+
     }
     public Ressource get_Ressource(MaterialRessourceType type)
     {
@@ -156,7 +156,7 @@ public class RessourceManager : Singleton<RessourceManager>
         return m_dictionnaire_armes[type];
     }
     void Start()
-    {  
+    {
         foreach (Ressource ress in ressources)
         {
             m_dictionnaire_ressoucres.Add(ress.type, ress);
@@ -167,8 +167,24 @@ public class RessourceManager : Singleton<RessourceManager>
             m_dictionnaire_armes.Add(ar.type, ar);
         }
     }
+
     void Update()
     {
+        if (Input.GetButtonDown("SheetRessources"))
+        {
+            foreach (KeyValuePair<MaterialRessourceType, Ressource> ressPair in m_dictionnaire_ressoucres)
+            {
+                if (ressPair.Value.type != MaterialRessourceType.None)
+                {
+                    Ressource r = ressPair.Value;
+                    r.nb = 999;
+                    m_dictionnaire_ressoucres.Remove(ressPair.Value.type);
+                    m_dictionnaire_ressoucres[ressPair.Value.type] = r;
+                    Debug.Log("YOYOYOYOYOYOYOYYO");
+                }
+
+            }
+        }
     }
 }
 
