@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 public class Serviteur : MonoBehaviour
 {
-    public float speed;
+    float speed = 2;
     public GameObject target;
     Animator animator;
     public GameObject serviteur;
     public GameObject origin;
+    public GameObject target_intermediaire;
     public RessourceManager.MaterialRessourceType type;
     bool Isobjectif_atteint = false;
     
@@ -17,11 +18,13 @@ public class Serviteur : MonoBehaviour
     {
     }
 
-    public void init(GameObject t,GameObject origin,GameObject serviteur)
+    public void init(GameObject t,GameObject origin,GameObject serviteur, GameObject tI=null)
     {
         target = t;
         this.serviteur = serviteur;
         this.origin = origin;
+        target_intermediaire = tI;
+        
     }
 
     public void retour()
@@ -35,19 +38,6 @@ public class Serviteur : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         
-    }
-    void Update()
-    {
-        if (!Isobjectif_atteint)
-        {
-            objectif_atteint();
-            float step = speed * Time.deltaTime;
-            transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), new Vector2(target.transform.position.x, transform.position.y), step);
-            Update_animation();
-
-        }
-
-
     }
     IEnumerator Ranger_Stock()
     {
@@ -64,22 +54,52 @@ public class Serviteur : MonoBehaviour
         this.type = type;
         StartCoroutine("Ranger_Stock");        
     }
-    public void objectif_atteint()
+
+    void Update()
     {
-       // Debug.Log(Isobjectif_atteint);
-        if (Isobjectif_atteint == false)
+        if (!Isobjectif_atteint)
+        {
+            
+            Transform the_target_transform = null;
+            if (target_intermediaire == null) { the_target_transform = target.transform; }
+            else if (target_intermediaire != null) { the_target_transform = target_intermediaire.transform; }
+            objectif_atteint(the_target_transform);
+            float step = speed * Time.deltaTime;
+            transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), new Vector2(the_target_transform.transform.position.x, transform.position.y), step);
+            Update_animation();
+
+        }
+
+
+    }
+    public void objectif_atteint(Transform the_target_transform)
+    {      
+        if (!Isobjectif_atteint)
         {
             float step = speed * Time.deltaTime;
-            Vector2 v = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), new Vector2(target.transform.position.x, transform.position.y), step);
-            if (transform.position.x == v.x)
+    
+            if (transform.position.x == the_target_transform.position.x)
             {
-                target.GetComponent<Interactable>().interagir(serviteur);
-                Isobjectif_atteint = true;
+                
+                if (target_intermediaire == null)
+                {
+                    target.GetComponent<Interactable>().interagir(serviteur);
+                    Isobjectif_atteint = true; 
+                }
+                else if (target_intermediaire != null)
+                {
+                    target_intermediaire.GetComponent<Interactable>().interagir(serviteur);
+                    target_intermediaire = null;
+                    Isobjectif_atteint = true;
+                }
+                
             }
             
         }
 
     }
+
+    
     void Update_animation()
     {
         if (transform.position.x < target.transform.position.x)
@@ -94,8 +114,60 @@ public class Serviteur : MonoBehaviour
         }
     }
 
-    public void ouvrirPorte(GameObject destination)
+    public void agir_Porte()
+    {
+        StartCoroutine("ouvrirPorte");
+    }
+
+    IEnumerator ouvrirPorte()
+    {
+        StartCoroutine("disparaitre");
+        yield return new WaitForSeconds(2f);
+        
+    }
+
+    IEnumerator disparaitre()
+    {
+        animator.SetBool("Disparaitre", true);
+        for (int i = 0; i <= 10; i++)
+        {
+            Color color = GetComponent<SpriteRenderer>().color;
+            GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, color.a - 0.1f);
+            yield return new WaitForSeconds(0.1f);
+
+        }
+        animator.SetBool("Disparaitre", false);
+
+    }
+
+    IEnumerator aparaitre()
+    {
+        animator.SetBool("Apparaitre", true);
+        for (int i = 0; i <= 10; i++)
+        {
+            Color color = GetComponent<SpriteRenderer>().color;
+            GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, color.a + 0.1f);
+            yield return new WaitForSeconds(0.1f);
+
+        }
+        animator.SetBool("Apparaitre", false);
+
+
+    }
+
+    IEnumerator teleporte(Transform destination)
     {
         transform.position = destination.transform.position;
+        StartCoroutine("aparaitre");
+        yield return new WaitForSeconds(1f);
+        Isobjectif_atteint = false;
+
+    }
+
+    public void teleporter(GameObject destination) {
+        //transform.position = destination.transform.position;
+        StartCoroutine("teleporte",destination.transform);
+        
+
     }
 }

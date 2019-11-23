@@ -118,13 +118,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2291575224088909486}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3610ca6152351a446b61d5f5ea10430b, type: 3}
+  m_Script: {fileID: 11500000, guid: 12b1bbbd97b406744a2589ea8daed617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 0
   target: {fileID: 0}
-  serviteur: {fileID: 2291575224088909486}
+  serviteur: {fileID: 0}
   origin: {fileID: 0}
+  target_intermediaire: {fileID: 0}
+  type: 0
 --- !u!222 &98512438321661600
 CanvasRenderer:
   m_ObjectHideFlags: 0
