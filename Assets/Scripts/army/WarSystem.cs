@@ -23,7 +23,7 @@ public class WarSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        army1 = new Army("Bad Skulls", 50);
+        army1 = new Army("Bad Skulls", 10);
         army2 = new Army("Bad Bees", 0);
 
         txtArmy1.text = army1.name;
