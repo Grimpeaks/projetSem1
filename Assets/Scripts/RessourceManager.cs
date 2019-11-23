@@ -172,17 +172,26 @@ public class RessourceManager : Singleton<RessourceManager>
     {
         if (Input.GetButtonDown("SheetRessources"))
         {
-            foreach (KeyValuePair<MaterialRessourceType, Ressource> ressPair in m_dictionnaire_ressoucres)
-            {
-                if (ressPair.Value.type != MaterialRessourceType.None)
-                {
-                    Ressource r = ressPair.Value;
-                    r.nb = 999;
-                    m_dictionnaire_ressoucres.Remove(ressPair.Value.type);
-                    m_dictionnaire_ressoucres[ressPair.Value.type] = r;
-                    Debug.Log("YOYOYOYOYOYOYOYYO");
-                }
+            //foreach (KeyValuePair<MaterialRessourceType, Ressource> ressPair in m_dictionnaire_ressoucres)
+            //{
+            //    if (ressPair.Value.type != MaterialRessourceType.None)
+            //    {
+            //        Ressource r = ressPair.Value;
+            //        r.nb = 999;
+            //        m_dictionnaire_ressoucres.Remove(ressPair.Value.type);
+            //        m_dictionnaire_ressoucres[ressPair.Value.type] = r;
+            //    }
+            //}
 
+            foreach (KeyValuePair<WeaponRessourceType, Arme> ressPair in m_dictionnaire_armes)
+            {
+                if (ressPair.Value.type != WeaponRessourceType.None)
+                {
+                    Arme r = ressPair.Value;
+                    r.nb = 999;
+                    m_dictionnaire_armes.Remove(ressPair.Value.type);
+                    m_dictionnaire_armes[ressPair.Value.type] = r;
+                }
             }
         }
     }
