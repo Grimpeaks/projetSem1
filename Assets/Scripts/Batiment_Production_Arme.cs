@@ -10,12 +10,23 @@ public class Batiment_Production_Arme : Batiment_Production
     public Button boutonProduction;
     public Canvas UICraft;
     public SpriteRenderer bubble;
-    
+    private GameObject depot;
 
-    private RessourceManager.WeaponRessourceType m_type_ressource_produite = RessourceManager.WeaponRessourceType.None;
+
+    private RessourceManager.WeaponRessourceType m_type_ressource_produite = RessourceManager.WeaponRessourceType.Epee;
     private int nb_to_create =0;
 
+    protected override void Spawn_Ajout()
+    {
+        SpawnManager.Instance.Ajouter_Serviteur(this.gameObject, null);
 
+    }
+
+    protected override void Spawn_Supprime()
+    {
+        SpawnManager.Instance.Supprimer_Serviteur(this.gameObject, null);
+
+    }
     public uint Calcul_Max_Production(RessourceManager.WeaponRessourceType type)
     {
         List<uint> liste_max = new List<uint>();
@@ -35,28 +46,32 @@ public class Batiment_Production_Arme : Batiment_Production
     }
     public override void Produire()
     {
-        if (m_type_ressource_produite != RessourceManager.WeaponRessourceType.None)
+       if (m_nb_serviteur > 0)
         {
-            if (nb_to_create!=0) { 
-                tpsProd -= Time.deltaTime * mutliplicateur_tps;       
-                if (tpsProd <= 0)
-                {
-                    tpsProd = tpsProdDépart;
-                    RessourceManager.Instance.Ajouter(m_type_ressource_produite);
-                    nb_to_create -= 1;
-                    audioSourceRessource.Play();
-                }
-                if (tpsProd != tpsProdDépart)
-                {
-                    progress.value = 100 - ((tpsProd / tpsProdDépart) * 100);
-                }
-            }
-            else
-            {
-                set_Production(RessourceManager.WeaponRessourceType.None, 0);
-            }
+            if (m_type_ressource_produite != RessourceManager.WeaponRessourceType.None)
+                    {
+                        if (nb_to_create!=0) { 
+                            tpsProd -= Time.deltaTime * mutliplicateur_tps;       
+                            if (tpsProd <= 0)
+                            {
+                                tpsProd = tpsProdDépart;
+                                SpawnManager.Instance.Ajouter_Au_Depot(depot, this.gameObject, RessourceManager.Instance.get_Arme(m_type_ressource_produite).image, RessourceManager.Instance.get_target(RessourceManager.Target.porteHaut));
+                                nb_to_create -= 1;
+                                audioSourceRessource.Play();
+                            }
+                            if (tpsProd != tpsProdDépart)
+                            {
+                                progress.value = 100 - ((tpsProd / tpsProdDépart) * 100);
+                            }
+                        }
+                        else
+                        {
+                            set_Production(RessourceManager.WeaponRessourceType.None, 0);
+                        }
+                    }
+   
         }
-    }
+   }
 
     public void set_Production(RessourceManager.WeaponRessourceType type, int nb)
     {
@@ -93,8 +108,12 @@ public class Batiment_Production_Arme : Batiment_Production
     }
     new void Start()
     {
+        
         base.Start();
         boutonProduction.onClick.AddListener(open);
+        this.depot = RessourceManager.Instance.get_target(RessourceManager.Instance.get_depot(m_type_ressource_produite));
+        SpawnManager.Instance.Ajouter_Au_Depot(depot, this.gameObject, RessourceManager.Instance.get_Arme(m_type_ressource_produite).image, RessourceManager.Instance.get_target(RessourceManager.Target.porteHaut));
+           
     }
 
     public void open()
