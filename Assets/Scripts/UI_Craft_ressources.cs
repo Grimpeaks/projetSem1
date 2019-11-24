@@ -17,6 +17,7 @@ public class UI_Craft_ressources : MonoBehaviour
     public Button boutonAjout;
     public Button boutonEnlever;
     public Button bouton_produire;
+    public Button boutonClose;
 
     public AudioSource audioSourceAjout;
     public AudioSource audioSourceMoins;
@@ -47,6 +48,8 @@ public class UI_Craft_ressources : MonoBehaviour
             RessourceManager.Instance.Supprimer(r.type, mult);
         }
 
+        if(nb_to_create != 0) { boutonClose.onClick.Invoke(); }
+        
 
     }
     public bool PeutEtreActif(bool btn)
