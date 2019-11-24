@@ -10,6 +10,7 @@ public class DisplayWeapon : DisplayRessource
 
     public override void interagir(GameObject serviteur)
     {
+        serviteur.GetComponent<Serviteur>().Agir_Stock(type);
         //Debug.Log("hello" + this.ToString());
         //Destroy(serviteur);
         //RessourceManager.Instance.Ajouter(type);

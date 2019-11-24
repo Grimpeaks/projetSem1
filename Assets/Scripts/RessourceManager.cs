@@ -59,6 +59,8 @@ public class RessourceManager : Singleton<RessourceManager>
         porteBas = 6,
         chambre = 7,
         forge = 8,
+        depotEpee = 9,
+        depot_Lance = 10,
 
     }
 
@@ -70,10 +72,11 @@ public class RessourceManager : Singleton<RessourceManager>
     private int nb_Max_serviteurs=15;
     private Dictionary<RessourceManager.MaterialRessourceType, Ressource> m_dictionnaire_ressoucres = new Dictionary<RessourceManager.MaterialRessourceType, Ressource>();
     private Dictionary<RessourceManager.WeaponRessourceType, Arme> m_dictionnaire_armes = new Dictionary<RessourceManager.WeaponRessourceType, Arme>();
-
     public Dictionary<RessourceManager.WeaponRessourceType, Arme> get_All_Weapon()
-    {
+    {  
+       
         return this.m_dictionnaire_armes;
+        
     }
     public int get_Nb_Serviteurs_restants()
     {
@@ -93,6 +96,21 @@ public class RessourceManager : Singleton<RessourceManager>
                 break;
             case MaterialRessourceType.Roche:
                 depot =Target.depotRoche;
+                break;
+        }
+        return depot;
+    }
+
+    public Target get_depot(WeaponRessourceType m)
+    {
+        Target depot = Target.house;
+        switch (m)
+        {
+            case WeaponRessourceType.Epee:
+                depot = Target.depotEpee;
+                break;
+            case WeaponRessourceType.Lance:
+                depot = Target.depot_Lance;
                 break;
         }
         return depot;
@@ -147,7 +165,9 @@ public class RessourceManager : Singleton<RessourceManager>
             m_dictionnaire_armes.Remove(typeA);
             m_dictionnaire_armes[typeA] = r;
         }
-       
+
+        
+
     }
     public Ressource get_Ressource(MaterialRessourceType type)
     {
@@ -168,9 +188,19 @@ public class RessourceManager : Singleton<RessourceManager>
         {
             m_dictionnaire_armes.Add(ar.type, ar);
         }
+
+       
     }
     void Update()
     {
+        //foreach (MaterialRessourceType res in Enum.GetValues(typeof(MaterialRessourceType)))
+        //{
+        //    if (res != MaterialRessourceType.None)
+        //    {
+        //        Ajouter(res, 999);
+        //    }
+            
+        //}
     }
 }
 

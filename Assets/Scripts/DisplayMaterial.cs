@@ -9,6 +9,7 @@ public class DisplayMaterial : DisplayRessource
 
     public override void interagir(GameObject serviteur)
     {
+        //Debug.Log(serviteur.GetComponent<Serviteur>().get_Est_assigne());
         serviteur.GetComponent<Serviteur>().Agir_Stock(type);
     }
 
