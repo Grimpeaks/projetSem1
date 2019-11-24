@@ -159,7 +159,7 @@ public class RessourceManager : Singleton<RessourceManager>
         else { return false; }
 
     }
-    public void Supprimer(MaterialRessourceType typeM, uint nb = 1)
+    public Boolean Supprimer(MaterialRessourceType typeM, uint nb = 1)
     {
         Ressource r = m_dictionnaire_ressoucres[typeM];
         r.nb -= nb;
@@ -174,7 +174,7 @@ public class RessourceManager : Singleton<RessourceManager>
         Compteur_Ressources -= 1;
 
     }
-    public void Supprimer(WeaponRessourceType typeA, uint nb = 1)
+    public Boolean Supprimer(WeaponRessourceType typeA, uint nb = 1)
     {
         Arme r = m_dictionnaire_armes[typeA];
         r.nb -= nb;
