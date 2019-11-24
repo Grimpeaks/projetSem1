@@ -18,6 +18,7 @@ public class RessourceManager : Singleton<RessourceManager>
         Lance,
         Epee
     }
+
     [System.Serializable]
     public struct Ressources_necessaire
     {
@@ -34,6 +35,7 @@ public class RessourceManager : Singleton<RessourceManager>
         public Sprite image;
         public uint nb;
     }
+
     [System.Serializable]
     public struct Arme
     {
@@ -67,11 +69,14 @@ public class RessourceManager : Singleton<RessourceManager>
     public GameObject[] targets;
     public Ressource[] ressources;
     public Arme[] armes;
-    private int m_max_ressource=15;
+    private int m_max_ressource=30;
     private int nb_serviteurs_utilise=0;
     private int nb_Max_serviteurs=15;
     private Dictionary<RessourceManager.MaterialRessourceType, Ressource> m_dictionnaire_ressoucres = new Dictionary<RessourceManager.MaterialRessourceType, Ressource>();
     private Dictionary<RessourceManager.WeaponRessourceType, Arme> m_dictionnaire_armes = new Dictionary<RessourceManager.WeaponRessourceType, Arme>();
+    private int Compteur_Ressources;
+    private int Compteur_Armes;
+
     public Dictionary<RessourceManager.WeaponRessourceType, Arme> get_All_Weapon()
     {  
        
@@ -125,28 +130,55 @@ public class RessourceManager : Singleton<RessourceManager>
         if (rendre) { nb = -1; }
         nb_serviteurs_utilise += nb;
     }
-    public int get_Max_Ressource()
+
+
+    public Boolean max_ressource_atteint()
     {
-        return m_max_ressource;
+        if(m_max_ressource >= Compteur_Ressources) {return true;}
+        else{return false;}
     }
+
+    public Boolean max_armes_atteint()
+    {
+        if (m_max_ressource >= Compteur_Armes) { return true; }
+        else { return false; }
+    }
+
     private RessourceManager()
     {
-    }
-    public void Ajouter(MaterialRessourceType typeM, uint nb = 1)
+    }   
+
+    public Boolean Ajouter(MaterialRessourceType typeM, uint nb = 1)
     {     
+        if(Compteur_Ressources < m_max_ressource)
+        {
             Ressource r = m_dictionnaire_ressoucres[typeM];
             r.nb += nb;
             m_dictionnaire_ressoucres.Remove(typeM);
-            m_dictionnaire_ressoucres[typeM] = r;         
+            m_dictionnaire_ressoucres[typeM] = r;
+            Compteur_Ressources += 1;
+
+            return true;
+        }
+        else { return false; }
+        
     }
-    public void Ajouter(WeaponRessourceType typeA, uint nb = 1)
+    public Boolean Ajouter(WeaponRessourceType typeA, uint nb = 1)
     {
+        if (Compteur_Armes < m_max_ressource)
+        {
             Arme r = m_dictionnaire_armes[typeA];
             r.nb += nb;
             m_dictionnaire_armes.Remove(typeA);
             m_dictionnaire_armes[typeA] = r;
+            Compteur_Armes += 1;
+
+            return true;
+        }
+        else { return false; }
+
     }
-    public void Supprimer(MaterialRessourceType typeM, uint nb = 1)
+    public Boolean Supprimer(MaterialRessourceType typeM, uint nb = 1)
     {
         Ressource r = m_dictionnaire_ressoucres[typeM];
         r.nb -= nb;
@@ -154,9 +186,14 @@ public class RessourceManager : Singleton<RessourceManager>
         {
             m_dictionnaire_ressoucres.Remove(typeM);
             m_dictionnaire_ressoucres[typeM] = r;
+
+            return true;
         }
+        else { return false; }
+        Compteur_Ressources -= 1;
+
     }
-    public void Supprimer(WeaponRessourceType typeA, uint nb = 1)
+    public Boolean Supprimer(WeaponRessourceType typeA, uint nb = 1)
     {
         Arme r = m_dictionnaire_armes[typeA];
         r.nb -= nb;
@@ -164,9 +201,11 @@ public class RessourceManager : Singleton<RessourceManager>
         {
             m_dictionnaire_armes.Remove(typeA);
             m_dictionnaire_armes[typeA] = r;
-        }
 
-        
+            return true;
+        }
+        else { return false; }
+        Compteur_Armes -= 1;
 
     }
     public Ressource get_Ressource(MaterialRessourceType type)
