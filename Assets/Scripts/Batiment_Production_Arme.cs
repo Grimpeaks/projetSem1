@@ -75,6 +75,7 @@ public class Batiment_Production_Arme : Batiment_Production
 
     public void set_Production(RessourceManager.WeaponRessourceType type, int nb)
     {
+        Debug.Log("HELLOO" + nb);
         if (nb_to_create <= 0)
         {
             m_type_ressource_produite = type;
@@ -92,7 +93,7 @@ public class Batiment_Production_Arme : Batiment_Production
             }
 
             if (m_type_ressource_produite == RessourceManager.WeaponRessourceType.None){bubble.gameObject.SetActive(true);}
-            else { bubble.gameObject.SetActive(false); }
+            else { bubble.gameObject.SetActive(false); this.depot = RessourceManager.Instance.get_target(RessourceManager.Instance.get_depot(m_type_ressource_produite));}
         }     
     }
     new void Update()
@@ -111,15 +112,16 @@ public class Batiment_Production_Arme : Batiment_Production
         
         base.Start();
         boutonProduction.onClick.AddListener(open);
-       // this.depot = RessourceManager.Instance.get_target(RessourceManager.Instance.get_depot(m_type_ressource_produite));
-       // SpawnManager.Instance.Ajouter_Au_Depot(depot, this.gameObject, RessourceManager.Instance.get_Arme(m_type_ressource_produite).image, RessourceManager.Instance.get_target(RessourceManager.Target.porteHaut));
-           
+        //this.depot = RessourceManager.Instance.get_target(RessourceManager.Instance.get_depot(m_type_ressource_produite));
+        //SpawnManager.Instance.Ajouter_Au_Depot(depot, this.gameObject, RessourceManager.Instance.get_Arme(m_type_ressource_produite).image, RessourceManager.Instance.get_target(RessourceManager.Target.porteHaut));
+        boutonMoins.onClick.Invoke();   
     }
 
     public void open()
     {
         audioSourceCreer.Play();
-        UICraft.gameObject.SetActive(true);        
+        UICraft.gameObject.SetActive(true);
+        RessourceManager.Instance.set_UI_Craft_Active(true);
     }
 
 }

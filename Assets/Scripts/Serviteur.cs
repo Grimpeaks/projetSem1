@@ -46,11 +46,8 @@ public class Serviteur : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        this.speed = Random.Range(1f, 5f);
-        Debug.Log(target.ToString());
-        //SpriteRenderer sr = GetComponent<SpriteRenderer>();
-        //sr.color =new Color(speed / 5f, sr.color.g, sr.color.b, 1f);
-        //GetComponent<SpriteRenderer>().color = sr.color;
+        this.speed = Random.Range(1, 5);
+        
     }
     void Update()
     {
