@@ -69,14 +69,14 @@ public class RessourceManager : Singleton<RessourceManager>
     public GameObject[] targets;
     public Ressource[] ressources;
     public Arme[] armes;
-    private int m_max_ressource=30;
-    private int nb_serviteurs_utilise=0;
-    private int nb_Max_serviteurs=15;
+    private int m_max_ressource = 30;
+    private int nb_serviteurs_utilise = 0;
+    private int nb_Max_serviteurs = 15;
     private Dictionary<RessourceManager.MaterialRessourceType, Ressource> m_dictionnaire_ressoucres = new Dictionary<RessourceManager.MaterialRessourceType, Ressource>();
     private Dictionary<RessourceManager.WeaponRessourceType, Arme> m_dictionnaire_armes = new Dictionary<RessourceManager.WeaponRessourceType, Arme>();
     private int Compteur_Ressources;
     private int Compteur_Armes;
-    private int bourse=0;
+    private int bourse = 0;
 
     public int get_bourse()
     {
@@ -85,9 +85,12 @@ public class RessourceManager : Singleton<RessourceManager>
 
     public bool acheter_serviteur(int prix)
     {
-        if (this.bourse >= prix) { this.bourse -= prix;
-            nb_Max_serviteurs += 1; 
-            return true; }      
+        if (this.bourse >= prix)
+        {
+            this.bourse -= prix;
+            nb_Max_serviteurs += 1;
+            return true;
+        }
         return false;
     }
 
@@ -97,10 +100,10 @@ public class RessourceManager : Singleton<RessourceManager>
     }
 
     public Dictionary<RessourceManager.WeaponRessourceType, Arme> get_All_Weapon()
-    {  
-       
+    {
+
         return this.m_dictionnaire_armes;
-        
+
     }
     public int get_Nb_Serviteurs_restants()
     {
@@ -157,8 +160,8 @@ public class RessourceManager : Singleton<RessourceManager>
 
     public Boolean max_ressource_atteint()
     {
-        if(m_max_ressource >= Compteur_Ressources) {return true;}
-        else{return false;}
+        if (m_max_ressource >= Compteur_Ressources) { return true; }
+        else { return false; }
     }
 
     public Boolean max_armes_atteint()
@@ -169,11 +172,11 @@ public class RessourceManager : Singleton<RessourceManager>
 
     private RessourceManager()
     {
-    }   
+    }
 
     public Boolean Ajouter(MaterialRessourceType typeM, uint nb = 1)
-    {     
-        if(Compteur_Ressources < m_max_ressource)
+    {
+        if (Compteur_Ressources < m_max_ressource)
         {
             Ressource r = m_dictionnaire_ressoucres[typeM];
             r.nb += nb;
@@ -184,7 +187,7 @@ public class RessourceManager : Singleton<RessourceManager>
             return true;
         }
         else { return false; }
-        
+
     }
     public Boolean Ajouter(WeaponRessourceType typeA, uint nb = 1)
     {
@@ -251,19 +254,29 @@ public class RessourceManager : Singleton<RessourceManager>
             m_dictionnaire_armes.Add(ar.type, ar);
         }
 
-       
+
     }
 
     void Update()
     {
-        //foreach (MaterialRessourceType res in Enum.GetValues(typeof(MaterialRessourceType)))
-        //{
-        //    if (res != MaterialRessourceType.None)
-        //    {
-        //        Ajouter(res, 999);
-        //    }
-            
-        //}
+        if (Input.GetButtonDown("SheetRessources"))
+        {
+            foreach (MaterialRessourceType res in Enum.GetValues(typeof(MaterialRessourceType)))
+            {
+                if (res != MaterialRessourceType.None)
+                {
+                    Ajouter(res, 999);
+                }
+            }
+
+            foreach (WeaponRessourceType weap in Enum.GetValues(typeof(WeaponRessourceType)))
+            {
+                if (weap != WeaponRessourceType.None)
+                {
+                    Ajouter(weap, 999);
+                }
+            }
+        }
     }
 }
 
