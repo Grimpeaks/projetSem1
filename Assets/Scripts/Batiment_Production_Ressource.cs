@@ -14,9 +14,7 @@ public class Batiment_Production_Ressource : Batiment_Production
         if (tpsProd <= 0)
         {
             tpsProd = tpsProdDépart;
-            prefab_serviteur.GetComponent<Serviteur>().init(depot, this.gameObject,prefab_serviteur);
-            prefab_serviteur.GetComponentInChildren<Image>().sprite = RessourceManager.Instance.get_Ressource(type_ressource_produite).image;
-            Instantiate(prefab_serviteur, new Vector2(transform.position.x, -3.3f), Quaternion.identity);
+            SpawnManager.Instance.Ajouter_Au_Depot(depot,this.gameObject, RessourceManager.Instance.get_Ressource(type_ressource_produite).image, null);
             audioSourceRessource.Play();
         }
         if (tpsProd != tpsProdDépart)
@@ -24,7 +22,19 @@ public class Batiment_Production_Ressource : Batiment_Production
             progress.value = 100 - ((tpsProd / tpsProdDépart) * 100);
         }
     }
-    
+
+    protected override void Spawn_Ajout()
+    {
+        SpawnManager.Instance.Ajouter_Serviteur(this.gameObject, RessourceManager.Instance.get_target(RessourceManager.Target.porteHaut));
+
+    }
+
+    protected override void Spawn_Supprime()
+    {
+        SpawnManager.Instance.Supprimer_Serviteur(this.gameObject, RessourceManager.Instance.get_target(RessourceManager.Target.porteBas));
+
+    }
+
     // Start is called before the first frame update
     new void Start()
     {
@@ -32,5 +42,6 @@ public class Batiment_Production_Ressource : Batiment_Production
         tpsProdDépart = RessourceManager.Instance.get_Ressource(type_ressource_produite).temps_producion;
         tpsProd = tpsProdDépart;
         this.depot = RessourceManager.Instance.get_target(RessourceManager.Instance.get_depot(type_ressource_produite));
+        
     }
 }

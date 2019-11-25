@@ -17,6 +17,7 @@ public class UI_Craft_ressources : MonoBehaviour
     public Button boutonAjout;
     public Button boutonEnlever;
     public Button bouton_produire;
+    public Button boutonClose;
 
     public AudioSource audioSourceAjout;
     public AudioSource audioSourceMoins;
@@ -47,6 +48,8 @@ public class UI_Craft_ressources : MonoBehaviour
             RessourceManager.Instance.Supprimer(r.type, mult);
         }
 
+        if(nb_to_create != 0) { boutonClose.onClick.Invoke(); }
+        
 
     }
     public bool PeutEtreActif(bool btn)
@@ -84,6 +87,7 @@ public class UI_Craft_ressources : MonoBehaviour
     }
     public void Update_Max_Production()
     {
+        Debug.Log(m_type);
         if (m_type != RessourceManager.WeaponRessourceType.None)
         {
             max_to_create = m_base.GetComponent<Batiment_Production_Arme>().Calcul_Max_Production(m_type);

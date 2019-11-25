@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public abstract class Batiment_Production : Interactable
@@ -8,6 +9,7 @@ public abstract class Batiment_Production : Interactable
     public Button boutonPlus;
     public Button boutonMoins;
     protected int m_nb_serviteur = 0;
+    protected int m_nb_serviteur_arrives = 0;
     public Text myText;
     protected string m_nb_serviteur_string;
     protected float tpsProd;
@@ -29,28 +31,44 @@ public abstract class Batiment_Production : Interactable
         progress.minValue = 0;
         progress.value = 100;
         progress.interactable = false;
-       //serviteur.GetComponent<Serviteur>().set_Target(RessourceManager.Instance.get_target(RessourceManager.Target.house));
     }
     public override void interagir(GameObject serviteur) 
     {
+        StartCoroutine("interagir_Coroutine", serviteur);
+
+    }
+
+    IEnumerator interagir_Coroutine(GameObject serviteur)
+    {
+        //Debug.Log(serviteur.GetComponent<Serviteur>().get_Est_assigne());
+        serviteur.GetComponent<Serviteur>().disparaitre();
+        yield return new WaitForSeconds(2f);
+        if (serviteur.GetComponent<Serviteur>().get_Est_assigne()==false)
+        {
+            //serviteur.GetComponent<Serviteur>().set_assigne(true);
+            mutliplicateur_tps += 0.5f;
+            m_nb_serviteur_arrives += 1;
+        }
+       
         Destroy(serviteur);
     }
     void OnClickPlus()
     {
         audioSourcePlus.Play();
         m_nb_serviteur += 1;
-        mutliplicateur_tps += 0.5f;
         RessourceManager.Instance.utiliser_serviteur();
+        Spawn_Ajout();
     }
     void OnClickMoins()
-    {
-        
+    {       
         if (m_nb_serviteur > 0)
         {
             audioSourceMoins.Play();
             m_nb_serviteur -= 1;
+            m_nb_serviteur_arrives -= 1;
             mutliplicateur_tps -= 0.5f;
-            RessourceManager.Instance.utiliser_serviteur(true);          
+            RessourceManager.Instance.utiliser_serviteur(true);
+            Spawn_Supprime();
         }
         if (m_nb_serviteur <= 0)
         {
@@ -59,29 +77,29 @@ public abstract class Batiment_Production : Interactable
             mutliplicateur_tps = 0;
             progress.value = 100;
         }
-
-
-        //Debug.Log("You have clicked the button Moins! " + tpsProd.ToString());
-        //supprimer un serviteur des deux listes
-        //Deplacer serviteur jusqu'a la base
     }
 
+    protected abstract void Spawn_Ajout();
+    protected abstract void Spawn_Supprime();
     protected void Update()
     {
         DisplayServiteur();
         Produire();
+        boutonMoins.interactable = Isactivatble(true);
+        boutonPlus.interactable = Isactivatble();
+        
+   }
 
-        if (m_nb_serviteur <= 0)
+    bool Isactivatble(bool moins=false)
+    {
+        if (moins)
         {
-            boutonMoins.interactable = false;
-            boutonPlus.interactable = true;
+            return m_nb_serviteur_arrives == m_nb_serviteur && m_nb_serviteur > 0;
         }
-        if (RessourceManager.Instance.get_Nb_Serviteurs_restants() <= 0)
+        else
         {
-            boutonPlus.interactable = false;
-            boutonMoins.interactable = true;
+            return RessourceManager.Instance.get_Nb_Serviteurs_restants() > 0;
         }
-        else { boutonPlus.interactable = true; boutonMoins.interactable = true; }
     }
     void DisplayServiteur()
     {
@@ -91,5 +109,5 @@ public abstract class Batiment_Production : Interactable
 
     public abstract void Produire();
 
-  
+
 }
