@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InterfaceUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class InterfaceUI : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandler
 {
     public Canvas myCanvas;
     public string myString;
@@ -34,7 +34,7 @@ public class InterfaceUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     private void OnMouseOver()
     {
-       displayInfo = true;
+        displayInfo = true;
     }
 
     private void OnMouseExit()
@@ -43,15 +43,15 @@ public class InterfaceUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        displayInfo = true;
-    }
+    //public void OnPointerEnter(PointerEventData eventData)
+    //{
+    //    displayInfo = true;
+    //}
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        displayInfo = false;
-    }
+    //public void OnPointerExit(PointerEventData eventData)
+    //{
+    //    displayInfo = false;
+    //}
 
     void FadeText()
     {
