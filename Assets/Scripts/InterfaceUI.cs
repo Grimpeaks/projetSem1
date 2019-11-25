@@ -65,11 +65,7 @@ public class InterfaceUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             myText.color = Color.Lerp(myText.color, Color.clear, fadeTime * Time.deltaTime);
         }
-
-
-
     }
-
 
     void FadeCanvas()
     {

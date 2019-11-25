@@ -92,7 +92,7 @@ public class Batiment_Production_Arme : Batiment_Production
             }
 
             if (m_type_ressource_produite == RessourceManager.WeaponRessourceType.None){bubble.gameObject.SetActive(true);}
-            else { bubble.gameObject.SetActive(false); }
+            else { bubble.gameObject.SetActive(false); this.depot = RessourceManager.Instance.get_target(RessourceManager.Instance.get_depot(m_type_ressource_produite));}
         }     
     }
     new void Update()
@@ -111,8 +111,8 @@ public class Batiment_Production_Arme : Batiment_Production
         
         base.Start();
         boutonProduction.onClick.AddListener(open);
-        this.depot = RessourceManager.Instance.get_target(RessourceManager.Instance.get_depot(m_type_ressource_produite));
-        // SpawnManager.Instance.Ajouter_Au_Depot(depot, this.gameObject, RessourceManager.Instance.get_Arme(m_type_ressource_produite).image, RessourceManager.Instance.get_target(RessourceManager.Target.porteHaut));
+        //this.depot = RessourceManager.Instance.get_target(RessourceManager.Instance.get_depot(m_type_ressource_produite));
+        //SpawnManager.Instance.Ajouter_Au_Depot(depot, this.gameObject, RessourceManager.Instance.get_Arme(m_type_ressource_produite).image, RessourceManager.Instance.get_target(RessourceManager.Target.porteHaut));
         boutonMoins.onClick.Invoke();   
     }
 
