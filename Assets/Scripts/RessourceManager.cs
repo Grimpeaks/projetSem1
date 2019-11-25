@@ -76,6 +76,25 @@ public class RessourceManager : Singleton<RessourceManager>
     private Dictionary<RessourceManager.WeaponRessourceType, Arme> m_dictionnaire_armes = new Dictionary<RessourceManager.WeaponRessourceType, Arme>();
     private int Compteur_Ressources;
     private int Compteur_Armes;
+    private int bourse=0;
+
+    public int get_bourse()
+    {
+        return this.bourse;
+    }
+
+    public bool acheter_serviteur(int prix)
+    {
+        if (this.bourse >= prix) { this.bourse -= prix;
+            nb_Max_serviteurs += 1; 
+            return true; }      
+        return false;
+    }
+
+    public void vendre_arme(int prix)
+    {
+        this.bourse += prix;
+    }
 
     public Dictionary<RessourceManager.WeaponRessourceType, Arme> get_All_Weapon()
     {  
@@ -86,6 +105,10 @@ public class RessourceManager : Singleton<RessourceManager>
     public int get_Nb_Serviteurs_restants()
     {
         return nb_Max_serviteurs - nb_serviteurs_utilise;
+    }
+    public int get_Max_Serviteurs()
+    {
+        return nb_Max_serviteurs;
     }
 
     public Target get_depot(MaterialRessourceType m)
