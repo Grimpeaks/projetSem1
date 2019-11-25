@@ -120,7 +120,8 @@ public class Batiment_Production_Arme : Batiment_Production
     public void open()
     {
         audioSourceCreer.Play();
-        UICraft.gameObject.SetActive(true);        
+        UICraft.gameObject.SetActive(true);
+        RessourceManager.Instance.set_UI_Craft_Active(true);
     }
 
 }

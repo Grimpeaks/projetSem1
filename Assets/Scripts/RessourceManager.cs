@@ -83,6 +83,11 @@ public class RessourceManager : Singleton<RessourceManager>
     {
         Is_UI_Craft_Active = isActive;
     }
+
+    public bool get_Is_UI_Craft_Active()
+    {
+        return this.Is_UI_Craft_Active;
+    }
     public int get_bourse()
     {
         return this.bourse;

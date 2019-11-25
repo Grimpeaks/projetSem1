@@ -27,14 +27,14 @@ public class InterfaceUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     // Update is called once per frame
     void Update()
     {
-       // this.displayInfo = EventSystem.current.IsPointerOverGameObject();
         FadeText();
         FadeCanvas();
+         
     }
 
     private void OnMouseOver()
     {
-       displayInfo = true;
+       displayInfo = !RessourceManager.Instance.get_Is_UI_Craft_Active();
     }
 
     private void OnMouseExit()
