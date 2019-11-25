@@ -75,6 +75,7 @@ public class Batiment_Production_Arme : Batiment_Production
 
     public void set_Production(RessourceManager.WeaponRessourceType type, int nb)
     {
+        Debug.Log("HELLOO" + nb);
         if (nb_to_create <= 0)
         {
             m_type_ressource_produite = type;

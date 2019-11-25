@@ -77,7 +77,12 @@ public class RessourceManager : Singleton<RessourceManager>
     private int Compteur_Ressources;
     private int Compteur_Armes;
     private int bourse=0;
+    private bool Is_UI_Craft_Active = false;
 
+    public void set_UI_Craft_Active(bool isActive)
+    {
+        Is_UI_Craft_Active = isActive;
+    }
     public int get_bourse()
     {
         return this.bourse;
