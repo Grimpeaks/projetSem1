@@ -21,10 +21,6 @@ public class UI_Sell_Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!RessourceManager.Instance.get_Is_UI_Craft_Active())
-        {
-            RessourceManager.Instance.set_UI_Craft_Active(true);
-        }
 
     }
 
@@ -57,6 +53,5 @@ public class UI_Sell_Weapon : MonoBehaviour
     {
         Canvas c = GetComponentInParent<Canvas>();
         c.gameObject.SetActive(false);
-        RessourceManager.Instance.set_UI_Craft_Active(false);
     }
 }

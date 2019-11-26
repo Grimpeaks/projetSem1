@@ -14,8 +14,6 @@ public class Serviteur : MonoBehaviour
     public RessourceManager.MaterialRessourceType type;
     bool Isobjectif_atteint = false;
     private bool estAssigne = false;
-    private Canvas canvasRes;
-    private Canvas canvasArm;
     
     public Serviteur()
     {
@@ -24,14 +22,12 @@ public class Serviteur : MonoBehaviour
     public void set_assigne(bool est) { this.estAssigne = est; }
     public bool get_Est_assigne() { return this.estAssigne; }
 
-    public void init(GameObject t,GameObject origin,GameObject serviteur,Canvas res,Canvas arm, GameObject tI=null)
+    public void init(GameObject t,GameObject origin,GameObject serviteur, GameObject tI=null)
     {
         target = t;
         this.serviteur = serviteur;
         this.origin = origin;
         target_intermediaire = tI;
-        this.canvasRes = res;
-        this.canvasArm = arm;
         
     }
 
@@ -184,15 +180,8 @@ public class Serviteur : MonoBehaviour
         {
             animator.SetBool("Range_Stock", true);
             yield return new WaitForSeconds(2);
-
-            if (RessourceManager.Instance.Ajouter(type) == false)
-            {
-                canvasRes.GetComponent<Warning_Bubble>().setDisplay(true);
-            }
-            else {
-                canvasRes.GetComponent<Warning_Bubble>().setDisplay(false); Debug.Log("ahhhh11111");
-            }
-            
+        
+            RessourceManager.Instance.Ajouter(type);
             serviteur.GetComponentInChildren<Image>().color = new Color(0f, 0f, 0f, 0f);
             retour(null);
             animator.SetBool("Range_Stock", false);
@@ -201,16 +190,8 @@ public class Serviteur : MonoBehaviour
         {
             animator.SetBool("Range_Stock", true);
             yield return new WaitForSeconds(2);
-            
-            if(RessourceManager.Instance.Ajouter(type) == false)
-            {
-                canvasArm.GetComponent<Warning_Bubble>().setDisplay(true);
-                
-            }
-            else {
-                canvasRes.GetComponent<Warning_Bubble>().setDisplay(false);
-            }
-
+        
+            RessourceManager.Instance.Ajouter(type);
             serviteur.GetComponentInChildren<Image>().color = new Color(0f, 0f, 0f, 0f);
             retour(RessourceManager.Instance.get_target(RessourceManager.Target.porteBas));
             animator.SetBool("Range_Stock", false);

@@ -176,7 +176,7 @@ public class RessourceManager : Singleton<RessourceManager>
 
     public Boolean max_armes_atteint()
     {
-        if (Compteur_Armes >= m_max_ressource) { return true; }
+        if (m_max_ressource >= Compteur_Armes) { return true; }
         else { return false; }
     }
 
@@ -185,8 +185,8 @@ public class RessourceManager : Singleton<RessourceManager>
     }
 
     public Boolean Ajouter(MaterialRessourceType typeM, uint nb = 1)
-    {     
-        if(max_ressource_atteint()== false)
+    {
+        if (Compteur_Ressources < m_max_ressource)
         {
             Ressource r = m_dictionnaire_ressoucres[typeM];
             r.nb += nb;
@@ -201,7 +201,7 @@ public class RessourceManager : Singleton<RessourceManager>
     }
     public Boolean Ajouter(WeaponRessourceType typeA, uint nb = 1)
     {
-        if (max_armes_atteint() == false)
+        if (Compteur_Armes < m_max_ressource)
         {
             Arme r = m_dictionnaire_armes[typeA];
             r.nb += nb;

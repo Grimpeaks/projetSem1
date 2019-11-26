@@ -5,14 +5,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InterfaceUI : MonoBehaviour
+public class InterfaceUI : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandler
 {
     public Canvas myCanvas;
     public string myString;
     public Text myText;
     public float fadeTime;
     public bool displayInfo;
-
 
 
     // Start is called before the first frame update
@@ -81,6 +80,4 @@ public class InterfaceUI : MonoBehaviour
         }
 
     }
-
-
 }
