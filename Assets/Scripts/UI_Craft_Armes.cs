@@ -9,6 +9,7 @@ public class UI_Craft_Armes : MonoBehaviour
     public GameObject prefab;
     public GameObject UI;
     public Button close;
+    private GameObject button_selected= null;
     
     void Start()
     {
@@ -22,31 +23,38 @@ public class UI_Craft_Armes : MonoBehaviour
     void Update()
     {
         
+        if (button_selected != null)
+        {
+            button_selected.transform.GetChild(1).GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
+        }
+
     }
 
     public void Populate()
     {
-        GameObject newObj;
+       
         foreach(RessourceManager.WeaponRessourceType weapon in Enum.GetValues(typeof(RessourceManager.WeaponRessourceType)))
         {
             if(weapon != RessourceManager.WeaponRessourceType.None)
             {
+                GameObject newObj;
                 RessourceManager.Arme arme = RessourceManager.Instance.get_Arme(weapon);
                 newObj = (GameObject)Instantiate(prefab, transform);
-                newObj.GetComponent<Button>().image.sprite = arme.image_UI_Base;
-                newObj.GetComponent<Button>().GetComponentInChildren<Text>().text = "";
-                newObj.GetComponent<Button>().onClick.AddListener(delegate { OnclickArme(weapon); });
-                SpriteState s = new SpriteState();
-                s.selectedSprite = arme.image_UI_Selected;
-                newObj.GetComponent<Button>().spriteState = s;
+                newObj.transform.GetChild(0).GetComponent<Image>().sprite = arme.image;
+                newObj.GetComponent<Button>().onClick.AddListener(delegate { OnclickArme(weapon,newObj); });
                
             }
         }
     }
 
-    public void OnclickArme(RessourceManager.WeaponRessourceType type)
+    public void OnclickArme(RessourceManager.WeaponRessourceType type, GameObject b)
     {
         UI.GetComponentInChildren<UI_Craft_ressources>().Afficher_Ressources_Necessaires(type);
+        if (button_selected != null)
+        {
+            button_selected.transform.GetChild(1).GetComponent<Image>().color = new Color(1f, 1f, 1f, 0f);
+        }
+        button_selected = b;
     }
 
     public void OnclickClose()
