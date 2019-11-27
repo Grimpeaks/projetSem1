@@ -11,13 +11,18 @@ public class Serviteur : MonoBehaviour
     public GameObject serviteur;
     public GameObject origin;
     public GameObject target_intermediaire;
-    public RessourceManager.MaterialRessourceType type;
+    public Animator animator_state;
+    RessourceManager.MaterialRessourceType type;
     bool Isobjectif_atteint = false;
     private bool estAssigne = false;
-    
+    public Button b;
+    private int sens = 1;
+
+   
     public Serviteur()
     {
     }
+
 
     public void set_assigne(bool est) { this.estAssigne = est; }
     public bool get_Est_assigne() { return this.estAssigne; }
@@ -30,7 +35,18 @@ public class Serviteur : MonoBehaviour
         target_intermediaire = tI;
         
     }
+     public void accelerer()
+     {
+        if (this.speed < 3)
+        {
+            this.speed = 0;          
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(200*sens, 150));
+            this.speed = 5;
+            animator.runtimeAnimatorController = RessourceManager.Instance.get_Animator(speed);
+            animator.speed = speed;
+        }
 
+    }
     public void retour(GameObject intermediaire)
     {
         GameObject tmp = origin;
@@ -43,6 +59,9 @@ public class Serviteur : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         this.speed = Random.Range(1, 5);
+        animator.runtimeAnimatorController = RessourceManager.Instance.get_Animator(speed);
+        animator.speed = speed ;
+        b.onClick.AddListener(accelerer);
         
     }
     void Update()
@@ -107,11 +126,13 @@ public class Serviteur : MonoBehaviour
         {
             animator.SetBool("VersGauche", false);
             animator.SetBool("VersDroite", true);
+            sens = -1;
         }
         if (transform.position.x > thetarget.transform.position.x)
         {
             animator.SetBool("VersGauche", true);
             animator.SetBool("VersDroite", false);
+            sens = 1;
         }
     }
     public void agir_Porte()

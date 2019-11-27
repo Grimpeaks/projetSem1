@@ -40,12 +40,10 @@ public abstract class Batiment_Production : Interactable
 
     IEnumerator interagir_Coroutine(GameObject serviteur)
     {
-        //Debug.Log(serviteur.GetComponent<Serviteur>().get_Est_assigne());
         serviteur.GetComponent<Serviteur>().disparaitre();
         yield return new WaitForSeconds(2f);
         if (serviteur.GetComponent<Serviteur>().get_Est_assigne()==false)
         {
-            //serviteur.GetComponent<Serviteur>().set_assigne(true);
             mutliplicateur_tps += 0.5f;
             m_nb_serviteur_arrives += 1;
         }

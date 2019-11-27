@@ -69,6 +69,7 @@ public class RessourceManager : Singleton<RessourceManager>
     public GameObject[] targets;
     public Ressource[] ressources;
     public Arme[] armes;
+    public RuntimeAnimatorController[] animators;
     private int m_max_ressource = 30;
     private int nb_serviteurs_utilise = 0;
     private int nb_Max_serviteurs = 15;
@@ -79,6 +80,13 @@ public class RessourceManager : Singleton<RessourceManager>
     private int bourse=0;
     private bool Is_UI_Craft_Active = false;
 
+
+    public RuntimeAnimatorController get_Animator(float speed)
+    {
+        int ind = 0;
+        if (speed <= 2) { ind = 1; }
+        return animators[ind];
+    }
     public void set_UI_Craft_Active(bool isActive)
     {
         Is_UI_Craft_Active = isActive;
