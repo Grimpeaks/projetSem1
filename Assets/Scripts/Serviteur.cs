@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Serviteur : MonoBehaviour
 {
+    Canvas Warning_Bubble_Arme;
+    Canvas Warning_Bubble_Ressources;
     float speed;
     public GameObject target;
     Animator animator;
@@ -27,12 +29,14 @@ public class Serviteur : MonoBehaviour
     public void set_assigne(bool est) { this.estAssigne = est; }
     public bool get_Est_assigne() { return this.estAssigne; }
 
-    public void init(GameObject t,GameObject origin,GameObject serviteur, GameObject tI=null)
+    public void init(GameObject t,GameObject origin,GameObject serviteur, Canvas res, Canvas arme,GameObject tI=null)
     {
         target = t;
         this.serviteur = serviteur;
         this.origin = origin;
         target_intermediaire = tI;
+        this.Warning_Bubble_Ressources = res;
+        this.Warning_Bubble_Arme = arme;
         
     }
      public void accelerer()
@@ -201,8 +205,15 @@ public class Serviteur : MonoBehaviour
         {
             animator.SetBool("Range_Stock", true);
             yield return new WaitForSeconds(2);
-        
-            RessourceManager.Instance.Ajouter(type);
+
+            if (RessourceManager.Instance.Ajouter(type) == false)
+            {
+                Warning_Bubble_Ressources.GetComponent<Warning_Bubble>().setDisplay(true);
+            }
+            else
+            {
+                Warning_Bubble_Ressources.GetComponent<Warning_Bubble>().setDisplay(false);
+            }
             serviteur.GetComponentInChildren<Image>().color = new Color(0f, 0f, 0f, 0f);
             retour(null);
             animator.SetBool("Range_Stock", false);
@@ -211,9 +222,16 @@ public class Serviteur : MonoBehaviour
         {
             animator.SetBool("Range_Stock", true);
             yield return new WaitForSeconds(2);
-        
-            RessourceManager.Instance.Ajouter(type);
-            serviteur.GetComponentInChildren<Image>().color = new Color(0f, 0f, 0f, 0f);
+
+            if (RessourceManager.Instance.Ajouter(type) == false)
+            {
+                Warning_Bubble_Ressources.GetComponent<Warning_Bubble>().setDisplay(true);
+            }
+            else
+            {
+                Warning_Bubble_Ressources.GetComponent<Warning_Bubble>().setDisplay(false);
+            }
+        serviteur.GetComponentInChildren<Image>().color = new Color(0f, 0f, 0f, 0f);
             retour(RessourceManager.Instance.get_target(RessourceManager.Target.porteBas));
             animator.SetBool("Range_Stock", false);
     }

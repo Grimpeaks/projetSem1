@@ -68,7 +68,7 @@ public class RessourceManager : Singleton<RessourceManager>
     public Ressource[] ressources;
     public Arme[] armes;
     public RuntimeAnimatorController[] animators;
-    private int m_max_ressource = 30;
+    private int m_max_ressource = 3;
     private int nb_serviteurs_utilise = 0;
     private int nb_Max_serviteurs = 15;
     private Dictionary<RessourceManager.MaterialRessourceType, Ressource> m_dictionnaire_ressoucres = new Dictionary<RessourceManager.MaterialRessourceType, Ressource>();
@@ -78,7 +78,7 @@ public class RessourceManager : Singleton<RessourceManager>
     private int bourse=0;
     private bool Is_UI_Craft_Active = false;
 
-
+    
     public RuntimeAnimatorController get_Animator(float speed)
     {
         int ind = 0;
@@ -121,6 +121,8 @@ public class RessourceManager : Singleton<RessourceManager>
         return this.m_dictionnaire_armes;
 
     }
+
+    
     public int get_Nb_Serviteurs_restants()
     {
         return nb_Max_serviteurs - nb_serviteurs_utilise;

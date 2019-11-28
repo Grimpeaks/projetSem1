@@ -19,7 +19,7 @@ public class UI_Craft_Armes : MonoBehaviour
         c.gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         
