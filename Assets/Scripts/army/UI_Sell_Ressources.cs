@@ -56,7 +56,7 @@ public class UI_Sell_Ressources : MonoBehaviour
 
     public void Sell()
     {
-        audioSourceSell.Play();
+        //audioSourceSell.Play();
 
         if (nb_to_sell > RessourceManager.Instance.get_Arme(m_type).nb) { return; }
         RessourceManager.Instance.Supprimer(m_type, nb_to_sell);

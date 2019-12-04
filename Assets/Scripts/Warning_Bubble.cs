@@ -7,6 +7,7 @@ public class Warning_Bubble : MonoBehaviour
 
     public SpriteRenderer myCanvas;
     public bool displayInfo = false;
+    public AudioSource audioSourceInfo;
 
     // Start is called before the first frame update
     void Start()
@@ -18,25 +19,31 @@ public class Warning_Bubble : MonoBehaviour
     {
         
         FadeCanvas();
-       
+        
         
     }
 
     public void setDisplay(bool display)
     {
         displayInfo = display;
+
+        if(display == true)
+        {
+            audioSourceInfo.Play();
+        }
         
     }
 
     void FadeCanvas()
     {
         if (displayInfo)
-        {
-            myCanvas.gameObject.SetActive(true);
+        { 
+            myCanvas.gameObject.SetActive(true);    
         }
 
         else
         {
+            
             myCanvas.gameObject.SetActive(false);
         }
 

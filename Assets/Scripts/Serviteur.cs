@@ -19,8 +19,9 @@ public class Serviteur : MonoBehaviour
     private bool estAssigne = false;
     public Button b;
     private int sens = 1;
+    public AudioSource audioSourceVoix;
 
-   
+
     public Serviteur()
     {
     }
@@ -29,7 +30,7 @@ public class Serviteur : MonoBehaviour
     public void set_assigne(bool est) { this.estAssigne = est; }
     public bool get_Est_assigne() { return this.estAssigne; }
 
-    public void init(GameObject t,GameObject origin,GameObject serviteur, Canvas res, Canvas arme,GameObject tI=null)
+    public void init(GameObject t,GameObject origin,GameObject serviteur, Canvas res, Canvas arme, AudioSource audioSourceVoix, GameObject tI=null)
     {
         target = t;
         this.serviteur = serviteur;
@@ -37,6 +38,7 @@ public class Serviteur : MonoBehaviour
         target_intermediaire = tI;
         this.Warning_Bubble_Ressources = res;
         this.Warning_Bubble_Arme = arme;
+        this.audioSourceVoix = audioSourceVoix;
         
     }
      public void accelerer()
@@ -48,6 +50,7 @@ public class Serviteur : MonoBehaviour
             this.speed = 5;
             animator.runtimeAnimatorController = RessourceManager.Instance.get_Animator(speed);
             animator.speed = speed;
+            audioSourceVoix.Play();
         }
 
     }

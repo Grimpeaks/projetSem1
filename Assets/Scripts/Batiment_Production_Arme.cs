@@ -6,6 +6,7 @@ using System.Linq;
 
 public class Batiment_Production_Arme : Batiment_Production
 {
+    public AudioSource audioSourceOpen;
     public AudioSource audioSourceCreer;
     public Button boutonProduction;
     public Canvas UICraft;
@@ -75,7 +76,10 @@ public class Batiment_Production_Arme : Batiment_Production
 
     public void set_Production(RessourceManager.WeaponRessourceType type, int nb)
     {
-        Debug.Log("HELLOO" + nb);
+        //Debug.Log("HELLOO" + nb);
+
+        audioSourceCreer.Play();
+
         if (nb_to_create <= 0)
         {
             m_type_ressource_produite = type;
@@ -119,7 +123,7 @@ public class Batiment_Production_Arme : Batiment_Production
 
     public void open()
     {
-        audioSourceCreer.Play();
+        audioSourceOpen.Play();
         UICraft.gameObject.SetActive(true);
         RessourceManager.Instance.set_UI_Craft_Active(true);
     }
