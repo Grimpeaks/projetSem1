@@ -13641,7 +13641,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.350779, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -69.00244, y: 0.0000050365925}
+  m_AnchoredPosition: {x: -69.00232, y: 0.0000050365925}
   m_SizeDelta: {x: 67.52655, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1021679914
@@ -27225,7 +27225,7 @@ PrefabInstance:
     - target: {fileID: 1337185278386623525, guid: 7b65b56156b504748ae695348425a8ce,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1337185278386623525, guid: 7b65b56156b504748ae695348425a8ce,
         type: 3}
@@ -27257,6 +27257,27 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 1337185278386623525, guid: 7b65b56156b504748ae695348425a8ce,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1337185278386623525, guid: 7b65b56156b504748ae695348425a8ce,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1337185278386623525, guid: 7b65b56156b504748ae695348425a8ce,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1337185278386623525, guid: 7b65b56156b504748ae695348425a8ce,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 11500000, guid: 9bde985a6b7c80a41a5a5ac6034558d9,
+        type: 3}
     - target: {fileID: 1337185279109952710, guid: 7b65b56156b504748ae695348425a8ce,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

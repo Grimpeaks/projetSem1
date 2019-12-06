@@ -56,12 +56,12 @@ public class WarSystem : MonoBehaviour
         if (indexArmy == 1)
         {
             army1.power += RessourceManager.Instance.get_Arme(type).puissance * number;
-            RessourceManager.Instance.vendre_arme((int)RessourceManager.Instance.get_Arme(type).prix);
+            RessourceManager.Instance.vendre_arme((int)(RessourceManager.Instance.get_Arme(type).prix * number));
         }
         else
         {
             army2.power += RessourceManager.Instance.get_Arme(type).puissance * number;
-            RessourceManager.Instance.vendre_arme((int)RessourceManager.Instance.get_Arme(type).prix);
+            RessourceManager.Instance.vendre_arme((int)(RessourceManager.Instance.get_Arme(type).prix * number));
         }
     }
 }
