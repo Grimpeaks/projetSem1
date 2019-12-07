@@ -16,6 +16,7 @@ public class SpawnManager : Singleton<SpawnManager>
         GameObject s = Instantiate(prefab_serviteur, RessourceManager.Instance.get_target(RessourceManager.Target.chambre).transform.position, Quaternion.identity);
         s.GetComponent<Serviteur>().init(destination, null, s,Warning_Bubble_Ressources,Warning_Bubble_Arme, audioSourceVoix, intermediaire);
         s.GetComponentInChildren<Image>().sprite = transparent_Image;
+        RessourceManager.Instance.get_target(RessourceManager.Target.chambre).GetComponent<Chambre>().supp_serviteur();
     }
     public void Supprimer_Serviteur(GameObject depart, GameObject intermediaire)
     {
@@ -27,7 +28,6 @@ public class SpawnManager : Singleton<SpawnManager>
     }
     public void Ajouter_Au_Depot(GameObject depot, GameObject depart, Sprite type, GameObject intermediaire)
     {
-        Debug.Log(type.ToString());
         GameObject s = Instantiate(prefab_serviteur, depart.transform.position, Quaternion.identity);
         s.GetComponentInChildren<Image>().sprite = type;
         s.GetComponent<Serviteur>().set_assigne(true);

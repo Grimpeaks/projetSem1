@@ -92,6 +92,7 @@ public class UI_Sell_Ressources : MonoBehaviour
     void Update()
     {
         Update_Max_Selling();
+        button_sell.interactable = nb_to_sell > 0;
     }
 
     void Set_nb_to_sell(int nb)

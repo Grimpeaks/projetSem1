@@ -108,7 +108,7 @@ public class Batiment_Production_Arme : Batiment_Production
             boutonProduction.interactable = true;
         }
         else { boutonProduction.interactable = false; }
-
+       
         
     }
     new void Start()
