@@ -12,6 +12,9 @@ public class Batiment_Production_Arme : Batiment_Production
     public Canvas UICraft;
     public SpriteRenderer bubble;
     private GameObject depot;
+    public SpriteRenderer forgeron;
+    public SpriteRenderer forgeron_qui_sennuie;
+    public ParticleSystem particle;
 
 
     private RessourceManager.WeaponRessourceType m_type_ressource_produite = RessourceManager.WeaponRessourceType.Epee;
@@ -49,6 +52,7 @@ public class Batiment_Production_Arme : Batiment_Production
     {
        if (m_nb_serviteur > 0)
         {
+            
             if (m_type_ressource_produite != RessourceManager.WeaponRessourceType.None)
                     {
                         if (nb_to_create!=0) { 
@@ -72,12 +76,25 @@ public class Batiment_Production_Arme : Batiment_Production
                     }
    
         }
-   }
+
+        if (serviteurArrivee > 0) {
+            if (nb_to_create > 0) {
+                forgeron.gameObject.SetActive(true);
+                forgeron_qui_sennuie.gameObject.SetActive(false);
+                particle.gameObject.SetActive(true);
+            }
+            else {
+                forgeron_qui_sennuie.gameObject.SetActive(true);
+                forgeron.gameObject.SetActive(false);
+                particle.gameObject.SetActive(false);
+            }
+            
+        }
+        else { forgeron.gameObject.SetActive(false); forgeron_qui_sennuie.gameObject.SetActive(false); }
+    }
 
     public void set_Production(RessourceManager.WeaponRessourceType type, int nb)
     {
-        //Debug.Log("HELLOO" + nb);
-
         audioSourceCreer.Play();
 
         if (nb_to_create <= 0)
@@ -112,13 +129,11 @@ public class Batiment_Production_Arme : Batiment_Production
         
     }
     new void Start()
-    {
-        
+    {      
         base.Start();
         boutonProduction.onClick.AddListener(open);
-        //this.depot = RessourceManager.Instance.get_target(RessourceManager.Instance.get_depot(m_type_ressource_produite));
-        //SpawnManager.Instance.Ajouter_Au_Depot(depot, this.gameObject, RessourceManager.Instance.get_Arme(m_type_ressource_produite).image, RessourceManager.Instance.get_target(RessourceManager.Target.porteHaut));
-        boutonMoins.onClick.Invoke();   
+        boutonMoins.onClick.Invoke();
+        particle.gameObject.SetActive(false);
     }
 
     public void open()
