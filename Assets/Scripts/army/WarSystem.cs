@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class WarSystem : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class WarSystem : MonoBehaviour
     private float warStatusValue;
 
     public Slider warStatusBar;
+
+    public AudioMixer musicAudioMixer;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +44,9 @@ public class WarSystem : MonoBehaviour
     {
         warStatusValue += ((float)army1.power - (float)army2.power) * difficultyCoef;
         warStatusBar.value = warStatusValue;
+        musicAudioMixer.SetFloat("volumePeaceMusic", -(Mathf.Abs(warStatusValue))/10);
+        musicAudioMixer.SetFloat("volumeWarMusic", Mathf.Lerp(-10, 7, (Mathf.Abs(warStatusValue)) / 100));
+        musicAudioMixer.SetFloat("lowpassWarMusic", Mathf.Lerp(10, 22000, (Mathf.Abs(warStatusValue)) / 100));
 
         txtPowerArmy1.text = army1.power.ToString();
         txtPowerArmy2.text = army2.power.ToString();
