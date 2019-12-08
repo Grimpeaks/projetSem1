@@ -39,16 +39,22 @@ public class WarSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        warStatusValue += ((float)army1.power - (float)army2.power) * difficultyCoef;
-        warStatusBar.value = warStatusValue;
+        if(Menu_pause.Instance.gameIsPause == false)
+        { 
 
-        txtPowerArmy1.text = army1.power.ToString();
-        txtPowerArmy2.text = army2.power.ToString();
+            warStatusValue += ((float)army1.power - (float)army2.power) * difficultyCoef;
+            warStatusBar.value = warStatusValue;
 
-        if (warStatusValue < warStatusBar.minValue || warStatusValue > warStatusBar.maxValue)
-        {
-            SceneManager.LoadScene("gameOverScene", LoadSceneMode.Single);
+            txtPowerArmy1.text = army1.power.ToString();
+            txtPowerArmy2.text = army2.power.ToString();
+
+            if (warStatusValue < warStatusBar.minValue || warStatusValue > warStatusBar.maxValue)
+            {
+                SceneManager.LoadScene("gameOverScene", LoadSceneMode.Single);
+            }
+
         }
+
     }
 
     public void SellWeapon(int indexArmy, RessourceManager.WeaponRessourceType type, uint number)
