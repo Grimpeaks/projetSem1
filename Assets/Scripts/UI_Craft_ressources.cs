@@ -79,6 +79,7 @@ public class UI_Craft_ressources : MonoBehaviour
     void Update()
     {
         Update_Max_Production();
+        bouton_produire.interactable = nb_to_create > 0;
     }
     void Set_nb_to_create(int nb)
     {
