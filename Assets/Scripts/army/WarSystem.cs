@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class WarSystem : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class WarSystem : MonoBehaviour
     private float warStatusValue;
 
     public Slider warStatusBar;
+
+    public AudioMixer musicAudioMixer;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +44,11 @@ public class WarSystem : MonoBehaviour
     {
         if(Menu_pause.Instance.gameIsPause == false)
         { 
+        warStatusValue += ((float)army1.power - (float)army2.power) * difficultyCoef;
+        warStatusBar.value = warStatusValue;
+        musicAudioMixer.SetFloat("volumePeaceMusic", -(Mathf.Abs(warStatusValue)) / 10);
+        musicAudioMixer.SetFloat("volumeWarMusic", Mathf.Lerp(-10, 7, (Mathf.Abs(warStatusValue)) / 100));
+        musicAudioMixer.SetFloat("lowpassWarMusic", Mathf.Lerp(10, 22000, (Mathf.Abs(warStatusValue)) / 100));
 
             warStatusValue += ((float)army1.power - (float)army2.power) * difficultyCoef;
             warStatusBar.value = warStatusValue;
@@ -62,12 +70,12 @@ public class WarSystem : MonoBehaviour
         if (indexArmy == 1)
         {
             army1.power += RessourceManager.Instance.get_Arme(type).puissance * number;
-            RessourceManager.Instance.vendre_arme((int)RessourceManager.Instance.get_Arme(type).prix);
+            RessourceManager.Instance.vendre_arme((int)(RessourceManager.Instance.get_Arme(type).prix * number));
         }
         else
         {
             army2.power += RessourceManager.Instance.get_Arme(type).puissance * number;
-            RessourceManager.Instance.vendre_arme((int)RessourceManager.Instance.get_Arme(type).prix);
+            RessourceManager.Instance.vendre_arme((int)(RessourceManager.Instance.get_Arme(type).prix * number));
         }
     }
 }
