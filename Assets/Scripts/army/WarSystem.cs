@@ -44,7 +44,7 @@ public class WarSystem : MonoBehaviour
     {
         warStatusValue += ((float)army1.power - (float)army2.power) * difficultyCoef;
         warStatusBar.value = warStatusValue;
-        musicAudioMixer.SetFloat("volumePeaceMusic", -(Mathf.Abs(warStatusValue))/10);
+        musicAudioMixer.SetFloat("volumePeaceMusic", -(Mathf.Abs(warStatusValue)) / 10);
         musicAudioMixer.SetFloat("volumeWarMusic", Mathf.Lerp(-10, 7, (Mathf.Abs(warStatusValue)) / 100));
         musicAudioMixer.SetFloat("lowpassWarMusic", Mathf.Lerp(10, 22000, (Mathf.Abs(warStatusValue)) / 100));
 
