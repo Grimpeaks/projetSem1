@@ -21,6 +21,7 @@ public abstract class Batiment_Production : Interactable
     public AudioSource audioSourceErreur;
     public Slider progress;
     public GameObject prefab_serviteur;
+    public int serviteurArrivee=0;
     
 
     protected void Start()
@@ -49,6 +50,7 @@ public abstract class Batiment_Production : Interactable
         }
        
         Destroy(serviteur);
+        serviteurArrivee += 1;
     }
     void OnClickPlus()
     {
@@ -67,6 +69,7 @@ public abstract class Batiment_Production : Interactable
             mutliplicateur_tps -= 0.5f;
             RessourceManager.Instance.utiliser_serviteur(true);
             Spawn_Supprime();
+            serviteurArrivee -= 1;
         }
         if (m_nb_serviteur <= 0)
         {

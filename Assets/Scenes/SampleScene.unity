@@ -459,7 +459,9 @@ MonoBehaviour:
   progress: {fileID: 175366757}
   prefab_serviteur: {fileID: 2291575224088909486, guid: 19c9ba9694e8e304b87a7d70dc11265a,
     type: 3}
+  serviteurArrivee: 0
   type_ressource_produite: 1
+  particle: {fileID: 0}
 --- !u!114 &21145178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6276,7 +6278,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 463441559}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.82854366
+  m_Size: 0.64922094
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -13769,7 +13771,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.350779, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -63.163074, y: 0.0000050365925}
+  m_AnchoredPosition: {x: -46.079372, y: 0.0000050365925}
   m_SizeDelta: {x: 67.52655, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1021679914
@@ -14260,7 +14262,9 @@ MonoBehaviour:
   progress: {fileID: 333597254}
   prefab_serviteur: {fileID: 2291575224088909486, guid: 19c9ba9694e8e304b87a7d70dc11265a,
     type: 3}
+  serviteurArrivee: 0
   type_ressource_produite: 2
+  particle: {fileID: 0}
 --- !u!114 &1074805099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15849,6 +15853,7 @@ MonoBehaviour:
   text_nb_serviteurs: {fileID: 1968405723}
   text_max_serviteurs: {fileID: 114502314}
   bouton_acheter: {fileID: 1393346311}
+  serviteurs: []
 --- !u!114 &1198480406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18814,7 +18819,9 @@ MonoBehaviour:
   progress: {fileID: 205696225}
   prefab_serviteur: {fileID: 2291575224088909486, guid: 19c9ba9694e8e304b87a7d70dc11265a,
     type: 3}
+  serviteurArrivee: 0
   type_ressource_produite: 3
+  particle: {fileID: 0}
 --- !u!114 &1435027261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23724,11 +23731,15 @@ MonoBehaviour:
   progress: {fileID: 1387536495}
   prefab_serviteur: {fileID: 2291575224088909486, guid: 19c9ba9694e8e304b87a7d70dc11265a,
     type: 3}
+  serviteurArrivee: 0
   audioSourceOpen: {fileID: 157880372}
   audioSourceCreer: {fileID: 1735544754}
   boutonProduction: {fileID: 2038388307}
   UICraft: {fileID: 297636214}
   bubble: {fileID: 1275259087}
+  forgeron: {fileID: 0}
+  forgeron_qui_sennuie: {fileID: 0}
+  particle: {fileID: 0}
 --- !u!114 &1776175412
 MonoBehaviour:
   m_ObjectHideFlags: 0

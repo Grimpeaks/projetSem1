@@ -7,6 +7,7 @@ public class Batiment_Production_Ressource : Batiment_Production
 {
     public RessourceManager.MaterialRessourceType type_ressource_produite;
     private GameObject depot;
+    public ParticleSystem particle;
 
     public override void Produire()
     {
@@ -42,6 +43,16 @@ public class Batiment_Production_Ressource : Batiment_Production
         tpsProdDépart = RessourceManager.Instance.get_Ressource(type_ressource_produite).temps_producion;
         tpsProd = tpsProdDépart;
         this.depot = RessourceManager.Instance.get_target(RessourceManager.Instance.get_depot(type_ressource_produite));
-        
+        particle.gameObject.SetActive(false);
+    }
+
+    new void Update()
+    {
+        base.Update();
+        if (m_nb_serviteur_arrives > 0)
+        {
+            particle.gameObject.SetActive(true);
+        }
+        else { particle.gameObject.SetActive(false); }
     }
 }
