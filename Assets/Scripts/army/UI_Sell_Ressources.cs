@@ -30,7 +30,8 @@ public class UI_Sell_Ressources : MonoBehaviour
     public AudioSource audioSourceSell;
 
     public GameObject m_warSystem;
-
+    public Text puissance;
+    public Text vente;
     private RessourceManager.WeaponRessourceType m_type = RessourceManager.WeaponRessourceType.None;
     private uint nb_to_sell = 0;
     private uint max_to_sell = 0;
@@ -93,6 +94,12 @@ public class UI_Sell_Ressources : MonoBehaviour
     {
         Update_Max_Selling();
         button_sell.interactable = nb_to_sell > 0;
+        if (m_type != RessourceManager.WeaponRessourceType.None)
+        {
+            RessourceManager.Arme arme = RessourceManager.Instance.get_Arme(m_type);
+            puissance.text = "Puissance : " + arme.puissance.ToString();
+            vente.text = "Vente : " + arme.prix.ToString();
+        }
     }
 
     void Set_nb_to_sell(int nb)
