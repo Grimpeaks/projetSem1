@@ -68,7 +68,7 @@ public class RessourceManager : Singleton<RessourceManager>
     public Ressource[] ressources;
     public Arme[] armes;
     public RuntimeAnimatorController[] animators;
-    private int m_max_ressource = 20;
+    private int m_max_ressource = 8;
     private int nb_serviteurs_utilise = 0;
     private int nb_Max_serviteurs = 15;
     private Dictionary<RessourceManager.MaterialRessourceType, Ressource> m_dictionnaire_ressoucres = new Dictionary<RessourceManager.MaterialRessourceType, Ressource>();
@@ -200,7 +200,7 @@ public class RessourceManager : Singleton<RessourceManager>
             r.nb += nb;
             m_dictionnaire_ressoucres.Remove(typeM);
             m_dictionnaire_ressoucres[typeM] = r;
-            Compteur_Ressources += 1;
+            Compteur_Ressources += (int)nb;
 
             return true;
         }
@@ -215,7 +215,7 @@ public class RessourceManager : Singleton<RessourceManager>
             r.nb += nb;
             m_dictionnaire_armes.Remove(typeA);
             m_dictionnaire_armes[typeA] = r;
-            Compteur_Armes += 1;
+            Compteur_Armes += (int)nb;
 
             return true;
         }
@@ -230,11 +230,11 @@ public class RessourceManager : Singleton<RessourceManager>
         {
             m_dictionnaire_ressoucres.Remove(typeM);
             m_dictionnaire_ressoucres[typeM] = r;
-
+            Compteur_Ressources -= (int)nb;
             return true;
         }
         else { return false; }
-        Compteur_Ressources -= 1;
+        
 
     }
     public Boolean Supprimer(WeaponRessourceType typeA, uint nb = 1)
@@ -245,11 +245,11 @@ public class RessourceManager : Singleton<RessourceManager>
         {
             m_dictionnaire_armes.Remove(typeA);
             m_dictionnaire_armes[typeA] = r;
-
+            Compteur_Armes -= (int)nb;
             return true;
         }
         else { return false; }
-        Compteur_Armes -= 1;
+        
 
     }
     public Ressource get_Ressource(MaterialRessourceType type)
@@ -272,11 +272,12 @@ public class RessourceManager : Singleton<RessourceManager>
             m_dictionnaire_armes.Add(ar.type, ar);
         }
 
-
+        //Debug.Log(m_max_ressource + "aaaahh");
     }
 
     void Update()
     {
+        Debug.Log(m_max_ressource + "aaaahh"+ Compteur_Ressources);
         if (Input.GetButtonDown("SheetRessources"))
         {
             foreach (MaterialRessourceType res in Enum.GetValues(typeof(MaterialRessourceType)))
