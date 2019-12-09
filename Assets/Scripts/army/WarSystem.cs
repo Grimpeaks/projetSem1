@@ -42,8 +42,8 @@ public class WarSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       // Menu_pause.Instance.gameIsPause == false
-        if (false)
+        
+        if (Menu_pause.Instance.gameIsPause == false)
         { 
         warStatusValue += ((float)army1.power - (float)army2.power) * difficultyCoef;
         warStatusBar.value = warStatusValue;
