@@ -68,7 +68,7 @@ public class RessourceManager : Singleton<RessourceManager>
     public Ressource[] ressources;
     public Arme[] armes;
     public RuntimeAnimatorController[] animators;
-    private int m_max_ressource = 3;
+    private int m_max_ressource = 20;
     private int nb_serviteurs_utilise = 0;
     private int nb_Max_serviteurs = 15;
     private Dictionary<RessourceManager.MaterialRessourceType, Ressource> m_dictionnaire_ressoucres = new Dictionary<RessourceManager.MaterialRessourceType, Ressource>();

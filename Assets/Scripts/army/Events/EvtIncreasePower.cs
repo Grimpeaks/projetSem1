@@ -12,10 +12,10 @@ public class EvtIncreasePower : MonoBehaviour, IWarPlayable
         switch (armyNo)
         {
             case 1:
-                warSystem.GetComponent<WarSystem>().army1.power += (uint)Random.Range(5, 20);
+                warSystem.GetComponent<WarSystem>().army1.power += (uint)Random.Range(3, 12);
                 break;
             case 2:
-                warSystem.GetComponent<WarSystem>().army2.power += (uint)Random.Range(5, 20);
+                warSystem.GetComponent<WarSystem>().army2.power += (uint)Random.Range(3, 12);
                 break;
             default:
                 break;
