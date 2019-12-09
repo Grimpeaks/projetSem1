@@ -24,7 +24,8 @@ public class UI_Craft_ressources : MonoBehaviour
     public AudioSource audioSourceCreer;
 
     public GameObject m_base;
-
+    public Text puissance;
+    public Text vente;
     private RessourceManager.WeaponRessourceType m_type = RessourceManager.WeaponRessourceType.None;
     private int nb_to_create=0;
     private uint max_to_create = 0;
@@ -80,6 +81,13 @@ public class UI_Craft_ressources : MonoBehaviour
     {
         Update_Max_Production();
         bouton_produire.interactable = nb_to_create > 0;
+        if(m_type!= RessourceManager.WeaponRessourceType.None)
+        {
+            RessourceManager.Arme arme = RessourceManager.Instance.get_Arme(m_type);
+            puissance.text = "Puissance : "+arme.puissance.ToString();
+            vente.text = "Vente : " + arme.prix.ToString();
+        }
+       
     }
     void Set_nb_to_create(int nb)
     {
