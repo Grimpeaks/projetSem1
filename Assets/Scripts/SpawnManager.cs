@@ -17,6 +17,7 @@ public class SpawnManager : Singleton<SpawnManager>
         s.GetComponent<Serviteur>().init(destination, null, s,Warning_Bubble_Ressources,Warning_Bubble_Arme, audioSourceVoix, intermediaire);
         s.GetComponentInChildren<Image>().sprite = transparent_Image;
         RessourceManager.Instance.get_target(RessourceManager.Target.chambre).GetComponent<Chambre>().supp_serviteur();
+
     }
     public void Supprimer_Serviteur(GameObject depart, GameObject intermediaire)
     {

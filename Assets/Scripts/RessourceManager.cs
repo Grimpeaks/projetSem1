@@ -16,7 +16,10 @@ public class RessourceManager : Singleton<RessourceManager>
     {
         None,
         Lance,
-        Epee
+        Epee,
+        Arc,
+        Fronde,
+        Dague
     }
 
     [System.Serializable]
@@ -61,6 +64,9 @@ public class RessourceManager : Singleton<RessourceManager>
         forge = 8,
         depotEpee = 9,
         depot_Lance = 10,
+        depot_Arc = 11,
+        depot_Fronde = 12,
+        depot_Dague = 13,
 
     }
 
@@ -68,7 +74,7 @@ public class RessourceManager : Singleton<RessourceManager>
     public Ressource[] ressources;
     public Arme[] armes;
     public RuntimeAnimatorController[] animators;
-    private int m_max_ressource = 8;
+    private int m_max_ressource = 20;
     private int nb_serviteurs_utilise = 0;
     private int nb_Max_serviteurs = 15;
     private Dictionary<RessourceManager.MaterialRessourceType, Ressource> m_dictionnaire_ressoucres = new Dictionary<RessourceManager.MaterialRessourceType, Ressource>();
@@ -105,6 +111,16 @@ public class RessourceManager : Singleton<RessourceManager>
         {
             this.bourse -= prix;
             nb_Max_serviteurs += 1;
+            return true;
+        }
+        return false;
+    }
+
+    public bool acheter_pause()
+    {
+        if (this.bourse >= 100)
+        {
+            this.bourse -= 100;
             return true;
         }
         return false;
@@ -161,6 +177,15 @@ public class RessourceManager : Singleton<RessourceManager>
             case WeaponRessourceType.Lance:
                 depot = Target.depot_Lance;
                 break;
+            case WeaponRessourceType.Arc:
+                depot = Target.depot_Arc;
+                break;
+            case WeaponRessourceType.Dague:
+                depot = Target.depot_Dague;
+                break;
+            case WeaponRessourceType.Fronde:
+                depot = Target.depot_Fronde;
+                break;
         }
         return depot;
     }
@@ -174,7 +199,6 @@ public class RessourceManager : Singleton<RessourceManager>
         if (rendre) { nb = -1; }
         nb_serviteurs_utilise += nb;
     }
-
 
     public Boolean max_ressource_atteint()
     {
@@ -277,7 +301,7 @@ public class RessourceManager : Singleton<RessourceManager>
 
     void Update()
     {
-        Debug.Log(m_max_ressource + "aaaahh"+ Compteur_Ressources);
+        //Debug.Log(m_max_ressource + "aaaahh"+ Compteur_Ressources);
         if (Input.GetButtonDown("SheetRessources"))
         {
             foreach (MaterialRessourceType res in Enum.GetValues(typeof(MaterialRessourceType)))
